@@ -1,0 +1,58 @@
+---
+- name: Join IPA domain
+  hosts: all
+  become: true
+  gather_facts: true
+  tasks:
+
+    - name: Install required python packages
+      ansible.builtin.package:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - python3-ipalib
+
+    - name: Uninstall IPA client (not the packages)
+      ansible.builtin.include_role:
+        name: redhat.rhel_idm.ipaclient
+      vars:
+        ipa_client_state: absent
+
+    - name: Deploy and configure IPA client
+      ansible.builtin.include_role:
+        name: redhat.rhel_idm.ipaclient
+      vars:
+        ipa_client_state: present
+        ipaadmin_password: "{ ds_admin_password }"
+        ipaclient_mkhomedir: true
+        ipaclient_ntp_servers: "192.168.1.1"
+        ipaclient_ssh_trust_dns: true
+        ipaclient_allow_repair: true
+        ipaclient_force_join: true
+        ipaclient_configure_firefox: true
+        ipaclient_all_ip_addresses: true
+        ipaclient_subid: true
+
+    - name: Install realmd for completeness
+      ansible.builtin.package:
+        name: realmd
+        state: present
+
+    - name: Create conf file for krb5 to support short hostnames
+      ansible.builtin.copy:
+        dest: "/etc/krb5.conf.d/short_hostnames"
+        mode: '0644'
+        content: |
+          # https://web.mit.edu/kerberos/krb5-latest/doc/admin/princ_dns.html
+          # so we don't need FQDNs
+          rdns = true
+          dns_canonicalize_hostname = fallback
+
+    - name: Create conf file for sshd to support short hostnames
+      ansible.builtin.copy:
+        dest: "/etc/ssh/sshd_config.d/60-short-hostnames.conf"
+        mode: '0644'
+        content: |
+          #https://web.mit.edu/kerberos/krb5-latest/doc/admin/princ_dns.html
+          # so we don't need FQDNs
+          GSSAPIStrictAcceptorCheck = no

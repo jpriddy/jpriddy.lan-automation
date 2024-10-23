@@ -1,0 +1,123 @@
+---
+- name: Register to RedHat Satellite
+  hosts: all
+  become: true
+  tasks:
+
+    - name: Unregister
+      ansible.builtin.command:
+        cmd: "subscription-manager remove --all"
+      when: "'RedHat' in ansible_distribution"
+
+#    - name: Delete system from Satellite
+#      redhat.satellite.host:
+#        name: '{{ inventory_hostname }}.{{ survey_domain }}' # fqdn required...
+#        state: absent
+#        server_url: https://sat.jpriddy.lan
+#        username: admin 
+#        password: "{{ sat_admin_password }}"
+#      when: "'RedHat' in ansible_distribution"    
+
+    - name: Remove any old katello-ca-consumer* CAs
+      ansible.builtin.package:
+        name: "katello-ca-consumer*"
+        state: absent
+      when: "'RedHat' in ansible_distribution"
+
+    - name: Clean up subscription-manager
+      ansible.builtin.command: "subscription-manager clean"
+      when: "'RedHat' in ansible_distribution"
+
+    - name: Install sat CA 
+      ansible.builtin.command: "/usr/bin/rpm -i -f --nosignature http://sat.jpriddy.lan/pub/katello-ca-consumer-latest.noarch.rpm"
+      when: "'RedHat' in ansible_distribution"
+
+    - name: (Re)Register host with Satellite  
+      redhat_subscription:
+        state: present
+        server_hostname: "sat.jpriddy.lan"
+        server_insecure: yes
+        org_id: "JPRIDDY"
+        activationkey: "rhel"
+        force_register: yes
+        consumer_name: '{{ inventory_hostname }}.{{ survey_domain }}'  # use the short hostname
+      register: registration_result
+      when: "'RedHat' in ansible_distribution"
+
+    - name: Subscription-manager refresh
+      ansible.builtin.command: "subscription-manager refresh"
+      when: "'RedHat' in ansible_distribution"
+
+    - name: Install insights client
+      ansible.builtin.package:
+        name: insights-client
+        state: present
+      when: "'RedHat' in ansible_distribution"
+    
+    - name: Install and register insights client      
+      ansible.builtin.command:
+        cmd: insights-client --register
+      when: "'RedHat' in ansible_distribution"
+
+    - debug:
+        msg: "Registration successful: {{ registration_result.changed }}"
+      when: "'RedHat' in ansible_distribution"
+
+
+#package not found?
+#    - name: Install katello-host-tools-tracer for additional functionality
+#      ansible.builtin.package:
+#        name: katello-host-tools-tracer
+#        state: present
+#      when: "'RedHat' in ansible_distribution"
+
+
+
+# requires a unique bios uuid (must clear out old/matching hosts in satellite)
+# works, but is a poor approach...  also requires authorization (and Auth should be hidden behind a credential)
+#    - name: Download a static generic registration script
+#      ansible.builtin.get_url:
+#        url: https://sat.ipa.jpriddy.com/register?force=true&hostgroup_id=2&ignore_subman_errors=true&lifecycle_environment_id=1&location_id=2&organization_id=1&update_packages=false
+#        validate_certs: false
+#        headers: ### this should really be in a custom cred...
+#          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo3LCJpYXQiOjE2ODg3MDEyNzIsImp0aSI6IjgwNzYxMzRlZDQzZjc0MWE5NjMyMzIwMDU4MTQ5NGJkNjg2YWMyODcyNjk3NTVjODMzNGM1NGU2NzM3OThkMzUiLCJzY29wZSI6InJlZ2lzdHJhdGlvbiNnbG9iYWwgcmVnaXN0cmF0aW9uI2hvc3QifQ.4lLenthlfcgpUrj9pAZTQ3h-Rs7q_WK9nKudCLlPLVk'
+#        dest: /root/satellite_reg.sh
+#        mode: "0755"
+#      when: "'RedHat' in ansible_distribution"
+
+#    - name: Run registration script
+#      ansible.builtin.shell: /root/satellite_reg.sh
+#      when: "'RedHat' in ansible_distribution"
+
+
+# complains about self signed cert (even with insecure option enabled?)
+#    - name: Register with activationkey
+#      community.general.redhat_subscription:
+#        state: present
+#        activationkey: "rhel"
+#        org_id: "JPRIDDY"
+#        server_hostname: "sat.ipa.jpriddy.com"
+#        server_insecure: "enable"
+#        force_register: true
+#        consumer_name: '{{ ansible_hostname }}'  # use the short hostname
+#      when: "'RedHat' in ansible_distribution"
+
+
+# needs further testing...
+#   - name: Use system role rhc
+#     include_role:
+#        name: fedora.linux-system-roles.rhc
+#     vars:
+#      rhc_auth:
+#        activation_keys:
+#          keys: "rhel"
+#      rhc_organization: "JPRIDDY"
+#      rhc_baseurl: "http://sat.ipa.jpriddy.com"
+#      rhc_server: "sat.ipa.jpriddy.com"
+#      rhc_state: present
+#      rhc_insights:
+#        autoupdate: true
+#        remediation: present
+#        state: present
+#
+

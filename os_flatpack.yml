@@ -1,0 +1,17 @@
+---
+- name: Setup flathub/pack
+  hosts: all
+  become: true
+  tasks:
+
+    - name: Ensure flatpak is installed
+      ansible.builtin.package:
+        name: flatpak
+        state: present
+
+    - name: Add the Flathub flatpak repository remote
+      community.general.flatpak_remote:
+        name: flathub
+        state: present
+        flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+        method: system

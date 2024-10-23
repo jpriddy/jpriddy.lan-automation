@@ -1,0 +1,35 @@
+---
+- name: Install Netdata
+  hosts: all
+  become: true
+
+  tasks:
+
+    - name: Install openssl
+      ansible.builtin.package:
+        name: openssl
+        state: present
+
+    - name: Download the installation script from internet
+      ansible.builtin.get_url:
+        url: https://my-netdata.io/kickstart.sh
+        dest: /tmp/netdata_kickstart.sh
+        mode: +x
+
+    - name: Run it
+      ansible.builtin.command: /tmp/netdata_kickstart.sh  --reinstall-even-if-unsafe --dont-wait --native-only --stable-channel --no-updates --disable-telemetry
+      register: output
+      changed_when: my_output.rc != 0
+
+    #- name: Replace config file  
+    #  ansible.builtin.template:
+    #    src: templates/netdata.conf.j2
+    #    dest: /etc/netdata/netdata.conf
+    #    owner: root
+    #    group: root
+    #    mode: u=wrx,g=rx,o=r,+x
+
+    - name: Restart Netdata
+      ansible.builtin.service:
+        name: netdata
+        state: restarted

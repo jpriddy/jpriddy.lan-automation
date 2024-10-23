@@ -1,0 +1,43 @@
+---
+- name: Detect Updated Images for Running Containers
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Get a list of running containers
+      containers.podman.podman_container: state=running
+      register: running_containers
+
+    - name: Get the image ID for each running container
+      set_fact: container_image_id="{{ item.id }}"
+      with_items: "{{ running_containers.results }}"
+
+    - name: Inspect each container to get the image
+      containers.podman.podman_container: state=inspect
+      with_items: "{{ container_image_id }}"
+      register: container_images
+
+    - name: Get the image name for each container
+      set_fact: container_image_name="{{ item.Config.Image }}"
+      with_items: "{{ container_images.results }}"
+
+    - name: Check for updates to each image
+      command: podman images --format "{{.ID}} {{.Repo}} {{.Tag}}" | grep "{{ container_image_name }}"
+      register: image_updates
+      with_items: "{{ container_image_name }}"
+
+    - name: Print updated images
+      debug:
+        msg: "Image {{ item.item }} has an update available. New image ID: {{ item.results.stdout.split()[0] }}"
+      when: image_updates.results.stdout != container_image_id
+
+
+    - name: Delete old image if an update is available
+      command: podman rmi {{ item.results.stdout.split()[0] }}
+      when: image_updates.results.stdout != container_image_id
+      with_items: "{{ container_image_name }}"
+
+    - name: Restart container if image was deleted
+      containers.podman.podman_container: state=restart
+      when: image_updates.results.stdout != container_image_id
+      with_items: "{{ container_image_id }}"

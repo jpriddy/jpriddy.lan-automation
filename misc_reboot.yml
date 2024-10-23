@@ -1,0 +1,8 @@
+---
+- name: Restart node
+  hosts: all
+  become: true
+  tasks:
+    - name: Reboot with a 4 minute timeout...
+      ansible.builtin.reboot:
+        reboot_timeout: 240

@@ -1,0 +1,29 @@
+---
+- name: Update Plex
+  hosts: all
+  become: true
+  tasks:
+
+   - name: Download the latest Plex rpm
+     ansible.builtin.get_url:
+       url: "https://downloads.plex.tv/plex-media-server-new/1.32.0.6918-6f393eda1/redhat/plexmediaserver-1.32.0.6918-6f393eda1.x86_64.rpm"
+       dest: "/tmp/plex-ansible-temp.rpm"
+       headers:
+         "X-Plex-Token": "{{ plexpass }}"
+
+   - name: Install Plex rpm package
+     ansible.builtin.yum:
+       name: "/tmp/plex-ansible-temp.rpm"
+       state: present
+       disable_gpg_check: true
+
+   - name: Fix permissions of mount point (from media kickstart profile)
+     ansible.builtin.file:
+       path: /var/lib/plexmediaserver
+       owner: "plex"
+       group: "plex"
+
+   - name: Restart the Plex service
+     ansible.builtin.systemd:
+       name: plexmediaserver
+       state: restarted

@@ -1,0 +1,126 @@
+---
+local:
+  hosts:
+    localhost:
+      ansible_host: "127.0.0.1"
+      
+appliances:
+  hosts:
+    synology:
+      ansible_host: "192.168.1.30"
+    firewall:
+      ansible_host: "192.168.1.1"
+      vars:
+        opnsense_base_url: "http://192.168.1.1"
+
+network_mikrotik:
+  hosts:
+    bassw00:
+      ansible_host: "192.168.1.10"
+    bassw01:
+      ansible_host: "192.168.1.11"
+    bassw02:
+      ansible_host: "192.168.1.12"
+    garsw00:
+      ansible_host: "192.168.1.14"
+    garsw01:
+      ansible_host: "192.168.1.15"
+    offsw00:
+      ansible_host: "192.168.1.18"
+    offsw01:
+      ansible_host: "192.168.1.19"
+    batsw00:
+      ansible_host: "192.168.1.23"
+  vars:
+    ansible_connection: "ansible.netcommon.network_cli"
+    ansible_network_os: "community.routeros.routeros"
+    ansible_user: "admin"
+
+network_ruckus:
+  hosts:
+    ap01:
+      ansible_host: "192.168.1.26"
+    ap02:
+      ansible_host: "192.168.1.27"
+    ap03:
+      ansible_host: "192.168.1.28"
+
+linux_clients:
+  hosts:
+    xps:
+      ansible_host: "192.168.1.107"
+
+mac_clients:
+  hosts:
+    mac:
+      ansible_host: "192.168.1.109"
+      
+kickstart_servers:
+  hosts:
+    kickstart:
+      ansible_host: "192.168.1.218"
+      ansible_user: "root"
+      ansible_ssh_pass: "installer"  #non-standard password
+    kickstart2:
+      ansible_host: "192.168.1.219"
+      ansible_user: "root"
+      ansible_ssh_pass: "installer"  #non-standard password
+      
+linux_servers:
+  hosts:
+    gar:
+      ansible_host: "192.168.1.29"
+    media:
+      ansible_host: "192.168.1.150"
+    virt1:
+      ansible_host: "192.168.1.235"
+    containers:
+      ansible_host: "192.168.1.155"
+    idm1:
+      ansible_host: "192.168.1.131"
+    idm2:
+      ansible_host: "192.168.1.132" 
+    aap-gw:
+      ansible_host: "192.168.1.134"
+    aap-ctl:
+      ansible_host: "192.168.1.135"
+    aap-ph:
+      ansible_host: "192.168.1.136"
+    aap-db:
+      ansible_host: "192.168.1.137"
+    aap-eda:
+      ansible_host: "192.168.1.138"    
+    db1:
+      ansible_host: "192.168.1.157" 
+    aapctl:
+      ansible_host: "192.168.1.158"
+
+aap_servers:
+  hosts:
+    aap-gw:
+      ansible_host: "192.168.1.134"
+    aap-ctl:
+      ansible_host: "192.168.1.135"
+    aap-ph:
+      ansible_host: "192.168.1.136"
+    aap-db:
+      ansible_host: "192.168.1.137"
+    aap-eda:
+      ansible_host: "192.168.1.138"
+
+
+
+windows_servers:
+  hosts:
+    dc1:
+      ansible_host: "192.168.1.161"
+    dc2:
+      ansible_host: "192.168.1.162"
+
+windows_clients:
+  hosts:
+    win11:
+      ansible_host: "192.168.1.153"  ###change me
+    desktop:
+      ansible_host: "192.168.1.102"
+

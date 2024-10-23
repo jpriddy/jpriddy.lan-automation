@@ -1,0 +1,42 @@
+---
+- name: Install/Configure autofs
+  hosts: all
+  become: true
+  tasks:
+
+   - name: Install autofs
+     ansible.builtin.package:
+       name: autofs
+       state: present
+
+   - name: Start and enable autofs
+     ansible.builtin.systemd:
+      name: autofs
+      state: reloaded
+      enabled: true
+
+   #- name: Create automounter configuration file
+   #  template:
+   #     src: automounter.conf.j2
+   #     dest: /etc/auto.master.d/auto.ansible
+   #     mode: '0644'
+   
+#   - name: Download synology.autofs and set permissions
+#     ansible.builtin.get_url:
+#      url: "http://192.168.1.30/kickstart/files/synology.autofs"
+#      dest: "/etc/auto.master.d/synology.autofs"
+#      mode: '0644'
+#
+#   - name: Download auto.synology and set permissions
+#     ansible.builtin.get_url:
+#      url: "http://192.168.1.30/kickstart/files/auto.synology"
+#      dest: "/etc/auto.synology"
+#      mode: '0644'
+#
+#   - name: Download credentials and set permissions
+#     ansible.builtin.get_url:
+#      url: "http://192.168.1.30/kickstart/files/.synology"
+#      dest: "/root/.synology"
+#      mode: '0600'
+
+

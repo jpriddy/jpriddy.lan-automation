@@ -1,0 +1,13 @@
+[defaults]
+host_key_checking = False #so the hosts/ips can be reused
+forks = 50
+callbacks_enabled = timer, profile_tasks, profile_roles
+pipelining = True
+
+#stdout_callback = debug
+
+
+[ssh_connection]
+ssh_args = -o ControlMaster=auto -o ControlPersist=240
+
+

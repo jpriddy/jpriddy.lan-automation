@@ -1,0 +1,12 @@
+---
+- name: Configure motd
+  hosts: all
+  gather_facts: true
+  become: true
+  tasks:
+
+  - name: Replacing /etc/motd with MOTD template
+    ansible.builtin.template:
+      src: templates/motd.j2
+      mode: '0644'
+      dest: /etc/motd

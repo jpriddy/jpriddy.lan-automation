@@ -1,0 +1,71 @@
+---
+- name: Configure kdump to capture core dumps
+  hosts: all
+  become: true
+  tasks:
+
+    - name: Install kexec-tools, crash, and nfs-utils
+      ansible.builtin.package:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - kexec-tools
+        - crash
+        - nfs-utils
+      when: "'RedHat' in ansible_distribution_file_variety"
+
+    - name: Create kdump.conf
+      ansible.builtin.copy:
+        dest: "/etc/kdump.conf"
+        mode: '0644'
+        owner: "root"
+        group: "root"
+        content: |
+          auto_reset_crashkernel yes
+          nfs 192.168.1.30:/volume2/crash
+          path /
+          core_collector makedumpfile -l --message-level 7 -d 31
+          failure_action reboot
+          final_action reboot
+          force_rebuild 1
+
+
+#    - name: Fix permissions of kdump.conf
+#      ansible.builtin.file:
+#        path: "/etc/kdump.conf"
+#        owner: "root"
+#        group: "root"
+
+    - name: Mount the nfs volume
+      ansible.posix.mount:
+        src: "192.168.1.30:/volume2/crash"
+        path: "/var/crash"
+        opts: "rw,sync,soft"
+        state: mounted
+        fstype: nfs
+
+    - name: Reset crash kernel to defaults
+      ansible.builtin.command: "kdumpctl reset-crashkernel --kernel=ALL"
+
+    - name: Rebuild initramfs
+      ansible.builtin.command: "kdumpctl rebuild"
+
+    - name: Start and enable kdump (may need a reboot to reserve ram)
+      ansible.builtin.systemd:
+        name: kdump
+        state: started
+        enabled: true
+
+# kdump role doesnt seem to work correctly...
+#    - name: Setup kdump using system role
+#      include_role:
+#        name: redhat.rhel_system_roles.kdump
+#      vars:
+#        kdump_target:
+#          type: xfs
+#          location: LABEL=/
+#        kdump_path: /var/crash
+#        kdump_system_action: reboot
+#        kdump_reboot_ok: false
+#        kdump_reboot_required: false
+#        kdump_core_collector: "makedumpfile -l --message-level 7 -d 31"

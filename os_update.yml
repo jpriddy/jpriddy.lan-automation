@@ -1,0 +1,82 @@
+- name: Update packages
+  hosts: all
+  become: true
+  tasks:
+
+    #- name: Universal package update
+    #  ansible.builtin.package:
+    #    name: '*'
+    #    state: present
+
+    - name: Ensure package repositories are up-to-date
+      dnf: state=latest
+      when:
+        - ansible_os_family == "RedHat"
+
+    - name: Update system packages
+      dnf: name='*' state=latest
+      when:
+        - ansible_os_family == "RedHat"
+
+    - name: Install system updates for debian based hosts (apt)
+      ansible.builtin.apt:
+        name: '*'
+        state: present
+        update_cache: true
+      when:
+        - ansible_os_family == "Debian"
+
+    - name: Install Windows updates
+      ansible.windows.win_updates:
+        category_names:
+          - SecurityUpdates
+          - CriticalUpdates
+          - DefinitionUpdates
+        state: installed
+      when:
+        - ansible_os_family == "Windows"
+
+#  - name: Install updates to homebrew
+#    homebrew:
+#      update_homebrew: true
+#      upgrade_all: true
+#    when:
+#    - ansible_os_family == "Darwin"
+
+#    - name: Check for available OPNSense updates
+#      opnsense_config:
+#        opnsense_api_key: "{{ opnsense_api_key }}"  #credential in aap
+#        opnsense_api_secret: "{{ opnsense_api_secret }}" #credential in aap
+#        opnsense_base_url: "{{ opnsense_base_url }}"
+#        section: system
+#        subsection: firmware
+#        action: check
+#    when:
+#    - ansible_os_family == "????"
+#
+#    - name: Download and install OPNSense updates
+#      opnsense_config:
+#        opnsense_api_key: "{{ opnsense_api_key }}"
+#        opnsense_api_secret: "{{ opnsense_api_secret }}"
+#        opnsense_base_url: "{{ opnsense_base_url }}"
+#        section: system
+#        subsection: firmware
+#        action: upgrade
+#    when:
+#    - ansible_os_family == "???"
+#
+## Home Assistant ##
+#    - name: Update pip
+#      pip:
+#        name: pip
+#        state: latest
+#
+#    - name: Upgrade Home Assistant
+#      pip:
+#        name: homeassistant
+#        state: latest
+#
+#    - name: Restart Home Assistant
+#      systemd:
+#        name: homeassistant
+#        state: restarted

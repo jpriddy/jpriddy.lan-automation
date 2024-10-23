@@ -1,0 +1,14 @@
+---
+- name: Configure logging
+  hosts: all
+  become: true
+  tasks:
+  
+    - name: Use system role to configure journald
+      ansible.builtin.include_role:
+        name: redhat.rhel_system_roles.journald
+      vars:
+        journald_persistent: true
+        journald_max_disk_size: 256
+        journald_per_user: true
+        journald_sync_interval: 1

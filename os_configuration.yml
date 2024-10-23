@@ -1,0 +1,52 @@
+---
+- name: OS Configuration
+  hosts: all
+  become: true
+  tasks:
+
+   - name: Install a bunch of packages from the base repos
+     ansible.builtin.package:
+      name: "{{ item }}"
+      state: present
+     with_items:
+      - bash-completion
+      - mlocate
+      - rsync
+      - nmap
+      - tuned      
+      - cifs-utils
+      - nfs-utils
+      #- python3-libselinux # required for ansible to work on fedora?
+      #- util-linux # for netdata to reclaim nodes
+      #- iftop   # not available on rhel 
+
+
+   - name: Configure timesync with system role redhat.rhel_system_roles.timesync
+     ansible.builtin.include_role:
+      name: redhat.rhel_system_roles.timesync
+     vars:
+      timesync_ntp_servers:
+       - hostname: 192.168.1.1
+         iburst: true
+
+   - name: Customize ssh server with system role redhat.rhel_system_roles.sshd
+     ansible.builtin.include_role:
+      name: redhat.rhel_system_roles.sshd
+     vars:
+      #sshd_config_owner: root
+      #sshd_config_group: root
+      #sshd_config_mode: 0600
+      #sshd_hostkey_owner: root
+      #sshd_hostkey_group: root
+      #sshd_hostkey_mode: 0600
+      sshd_PermitRootLogin: yes
+      sshd_X11Forwarding: yes
+      sshd_GSSAPIAuthentication: yes
+      sshd_ChallengeResponseAuthentication: yes
+      sshd_AllowTcpForwarding: yes
+
+   - name: Install guest agent if virtualized
+     ansible.builtin.package:
+       name: qemu-guest-agent
+       state: present
+     when: ansible_virtualization_role == "guest"
