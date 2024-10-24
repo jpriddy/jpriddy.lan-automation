@@ -49,6 +49,10 @@ linux_clients:
   hosts:
     xps:
       ansible_host: "192.168.1.107"
+    bas:
+      ansible_host: "192.168.1.27"
+    gar:
+      ansible_host: "192.168.1.28"
 
 mac_clients:
   hosts:
@@ -80,16 +84,6 @@ linux_servers:
       ansible_host: "192.168.1.131"
     idm2:
       ansible_host: "192.168.1.132" 
-    aap-gw:
-      ansible_host: "192.168.1.134"
-    aap-ctl:
-      ansible_host: "192.168.1.135"
-    aap-ph:
-      ansible_host: "192.168.1.136"
-    aap-db:
-      ansible_host: "192.168.1.137"
-    aap-eda:
-      ansible_host: "192.168.1.138"    
     db1:
       ansible_host: "192.168.1.157" 
     aapctl:
