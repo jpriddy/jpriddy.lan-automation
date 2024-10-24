@@ -1,10 +1,11 @@
-- name: Mount NFS shares from 192.168.1.30
+- name: Mount NFS shares from synology
   hosts: all
   become: yes
 
   vars:
     nfs_mounts:
       - { name: download, server_path: /volume1/download }
+      #all others on volume2
       - { name: iso, server_path: /volume2/iso }
       - { name: crash, server_path: /volume2/crash }
       - { name: scratch, server_path: /volume2/scratch }

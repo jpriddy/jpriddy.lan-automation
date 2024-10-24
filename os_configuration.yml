@@ -16,9 +16,12 @@
       - tuned      
       - cifs-utils
       - nfs-utils
-      #- python3-libselinux # required for ansible to work on fedora?
-      #- util-linux # for netdata to reclaim nodes
-      #- iftop   # not available on rhel 
+
+   - name: Install packages that are not on RHEL
+     ansible.builtin.package:
+      name: iftop
+      state: present
+     when: ansible_distribution != "RedHat" 
 
 
    - name: Configure timesync with system role redhat.rhel_system_roles.timesync

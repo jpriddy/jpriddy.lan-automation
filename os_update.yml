@@ -8,11 +8,6 @@
     #    name: '*'
     #    state: present
 
-    - name: Ensure package repositories are up-to-date
-      dnf: state=latest
-      when:
-        - ansible_os_family == "RedHat"
-
     - name: Update system packages
       dnf: name='*' state=latest
       when:

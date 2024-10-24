@@ -4,25 +4,7 @@
   become: true
   tasks:
 
-    - name: Install monitoring and metrics packages
-      ansible.builtin.package:
-        name: "{{ item }}"
-        state: present
-      with_items:
-        - tuned
-        #- iftop #not working on rhel
-        #- perf  ## doesn't exist on debian
-        #- htop #not working on rhel
 
-    - name: Enable and start tuned
-      ansible.builtin.systemd:
-        name: tuned
-        enabled: true
-        state: restarted
-
-    - name: Setup tuned for auto_profile
-      ansible.builtin.command:
-        cmd: "/usr/sbin/tuned-adm auto_profile"
 
     - name: Use redhat system role to set up a month of metrics
       ansible.builtin.include_role:

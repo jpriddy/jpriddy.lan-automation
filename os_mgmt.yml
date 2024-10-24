@@ -23,20 +23,12 @@
           - cockpit-pcp
         cockpit_config:
           WebService:
-            LoginTitle: "Cockpit Web Management - brought to you by Ansible and system roles"
+            LoginTitle: "Cockpit Web Management - welcome to jpriddy.lan"
             MaxStartups: 20
           Session:
             IdleTimeout: 15
             Banner: /etc/motd # see here: https://cockpit-project.org/faq.html#error-message-about-being-offline
         cockpit_enabled: true
-        #cockpit_started: true  #results in error?
         # cockpit_port: 9090 
         # ^^ need an offramp for redhat satellite and 
         # other services that may use 9090
-
-# role is enabling, but not starting cockpit... so we do it here
-#    - name: Start and enable cockpit
-#      ansible.builtin.service:
-#        name: cockpit.socket
-#        enabled: true
-#        state: started

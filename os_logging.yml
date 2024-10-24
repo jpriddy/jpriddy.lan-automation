@@ -4,11 +4,11 @@
   become: true
   tasks:
   
-    - name: Use system role to configure journald
+    - name: Use system role to configure journald to take up max 256mb
       ansible.builtin.include_role:
         name: redhat.rhel_system_roles.journald
       vars:
         journald_persistent: true
-        journald_max_disk_size: 256
+        journald_max_disk_size: 2048
         journald_per_user: true
         journald_sync_interval: 1
