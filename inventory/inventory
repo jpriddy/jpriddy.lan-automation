@@ -73,7 +73,9 @@ kickstart_servers:
 linux_servers:
   hosts:
     gar:
-      ansible_host: "192.168.1.29"
+      ansible_host: "192.168.1.27"
+    bas:
+      ansible_host: "192.168.1.28"
     media:
       ansible_host: "192.168.1.150"
     virt1:
