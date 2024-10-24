@@ -1,4 +1,4 @@
-# Jpriddy Labautomation Ansible Project
+# jpriddy.lan-automationd Ansible Project
 
 ## Included content/ Directory Structure
 
