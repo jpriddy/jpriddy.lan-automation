@@ -1,6 +1,6 @@
 schemaVersion: 2.2.2
 metadata:
-  name: jpriddy.lan-automation-foo
+  name: jpriddy.lan-automation
 components:
   - name: tooling-container
     container:
