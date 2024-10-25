@@ -6,11 +6,11 @@ collections:
   - name: ansible.posix
   - name: community.routeros
   - name: community.general
-  - name: redhat.rhel_system_roles
-  - name: redhat.rhel_idm
-  - name: redhat.satellite
   - name: fedora.linux_system_roles
   - name: chocolatey.chocolatey
   - name: microsoft.ad
   - name: containers.podman
+  - name: redhat.rhel_system_roles
+  - name: redhat.rhel_idm
+  - name: redhat.satellite
     
