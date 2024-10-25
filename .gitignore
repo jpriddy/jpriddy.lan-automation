@@ -1,3 +1,7 @@
+#random additions
+.DS_Store
+
+
 .logs/*
 *.retry
 *.vault
