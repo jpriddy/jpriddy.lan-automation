@@ -1,5 +1,8 @@
 ---
 collections:
+  - name: redhat.rhel_system_roles
+  - name: redhat.rhel_idm
+  - name: redhat.satellite
   - name: ansible.windows
   - name: ansible.scm
   - name: ansible.utils
@@ -10,7 +13,5 @@ collections:
   - name: chocolatey.chocolatey
   - name: microsoft.ad
   - name: containers.podman
-  - name: redhat.rhel_system_roles
-  - name: redhat.rhel_idm
-  - name: redhat.satellite
+
     
