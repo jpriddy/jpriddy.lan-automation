@@ -13,6 +13,6 @@
 
     - name: Set password for jpriddy
       user:
-        name: jpriddy
-        password: "{ jpriddy_password }"
+        name: "{{ user_account_username }}"
+        password: "{{ user_account_password }}"
         append: yes
