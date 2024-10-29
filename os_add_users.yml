@@ -6,7 +6,7 @@
 #using custom creds stored in controler 
   tasks:
     - name: Create user jpriddy, set password and add to users and wheel groups
-      user:
+      ansible.builtin.user:
         name: "{{ user_account_username }}"
         append: yes
         generate_ssh_key: yes

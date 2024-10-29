@@ -5,13 +5,13 @@
   tasks:
     
     - name: Remove default rule for wheel group
-      sudoers:
+      community.general.sudoers:
         commands: '%wheel  ALL=(ALL)       ALL'
         name: wheel_with_passwd
         append: yes
 
     - name: Add rule to sudoers for no passwd with wheel group
-      sudoers:
+      community.general.sudoers:
         commands: '%wheel ALL=(ALL) NOPASSWD: ALL'
         name: wheel_without_passwd
         append: yes
