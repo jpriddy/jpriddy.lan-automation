@@ -8,13 +8,7 @@
         name: "{{ user_account_username }}"
         append: yes  # Append to existing /etc/passwd file
         generate_ssh_key: yes
+        password: "{{ lookup('env', 'YOUR_PASSWORD_VARIABLE') }}"
         groups:  # Add user to groups (optional)
           - users
           - wheel
-
-    - name: Set password for jpriddy
-      user:
-        name: "{{ user_account_username }}"
-        password: "{{ '1{{ user_account_password }}' | password_hash('sha512') }}"
-        update_password: always
-        append: yes
