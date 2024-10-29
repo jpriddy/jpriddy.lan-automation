@@ -1,8 +1,9 @@
+---
 - name: Modify sudoers configuration
   hosts: all
   become: true
-
   tasks:
+    
     - name: Add rule to sudoers for no passwd with wheel group
       sudoers:
         commands: '%wheel ALL=(ALL) NOPASSWD: ALL'
