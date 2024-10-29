@@ -5,7 +5,7 @@
   tasks:
     - name: Create user jpriddy and add to users and wheel groups
       user:
-        name: jpriddy
+        name: "{{ user_account_username }}"
         append: yes  # Append to existing /etc/passwd file
         groups:  # Add user to groups (optional)
           - users
