@@ -3,12 +3,12 @@
   become: yes
 
   tasks:
-    - name: Create user jpriddy and add to users and wheel groups
+    - name: Create user jpriddy, set password and add to users and wheel groups
       user:
         name: "{{ user_account_username }}"
         append: yes  # Append to existing /etc/passwd file
         generate_ssh_key: yes
-        password: "{{ {{ user_account_password }} | password_hash('sha512') }}"
+        password: "{{ { user_account_password } | password_hash('sha512') }}"
         groups:  # Add user to groups (optional)
           - users
           - wheel
