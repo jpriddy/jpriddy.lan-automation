@@ -2,13 +2,14 @@
   hosts: all
   become: yes
 
+
+#using custom creds stored in controler 
   tasks:
     - name: Create user jpriddy, set password and add to users and wheel groups
       user:
         name: "{{ user_account_username }}"
         append: yes
         generate_ssh_key: yes
-        #password: "{{ '{{ user_account_password }}' | password_hash('sha512') }}"
         password: "{{ user_account_password }}"
         groups:
           - users
