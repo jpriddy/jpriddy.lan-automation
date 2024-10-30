@@ -21,4 +21,4 @@
         name: glances
         daemon_reload: true
         enabled: true
-        state: started
+        state: reloaded
