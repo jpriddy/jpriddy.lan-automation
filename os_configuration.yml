@@ -11,15 +11,6 @@
      with_items:
       - bash-completion
       - rsync
-      - nmap
-      #doesnt exist on f41 - mlocate
-
-   - name: Install packages that are not on RHEL
-     ansible.builtin.dnf:
-      name: iftop
-      state: present
-     when: ansible_distribution != "RedHat" 
-
 
    - name: Configure timesync with system role redhat.rhel_system_roles.timesync
      ansible.builtin.include_role:
