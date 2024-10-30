@@ -5,7 +5,7 @@
   tasks:
 
     - name: Install kexec-tools, crash, and nfs-utils
-      ansible.builtin.package:
+      ansible.builtin.dnf:
         name: "{{ item }}"
         state: present
       with_items:

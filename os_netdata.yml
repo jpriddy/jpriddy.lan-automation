@@ -6,7 +6,7 @@
   tasks:
 
     - name: Install openssl
-      ansible.builtin.package:
+      ansible.builtin.dnf:
         name: openssl
         state: present
 

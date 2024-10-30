@@ -5,7 +5,7 @@
   tasks:
 
     - name: Install packages
-      ansible.builtin.package:
+      ansible.builtin.dnf:
         name: "{{ item }}"
         state: present
       with_items:

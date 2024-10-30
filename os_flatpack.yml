@@ -5,7 +5,7 @@
   tasks:
 
     - name: Ensure flatpak is installed
-      ansible.builtin.package:
+      ansible.builtin.dnf:
         name: flatpak
         state: present
 

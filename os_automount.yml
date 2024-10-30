@@ -5,7 +5,7 @@
   tasks:
 
    - name: Install autofs
-     ansible.builtin.package:
+     ansible.builtin.dnf:
        name: autofs
        state: present
 

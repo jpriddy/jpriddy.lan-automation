@@ -5,7 +5,7 @@
   tasks:
 
    - name: Install a bunch of packages from the base repos
-     ansible.builtin.package:
+     ansible.builtin.dnf:
       name: "{{ item }}"
       state: present
      with_items:
@@ -15,7 +15,7 @@
       #doesnt exist on f41 - mlocate
 
    - name: Install packages that are not on RHEL
-     ansible.builtin.package:
+     ansible.builtin.dnf:
       name: iftop
       state: present
      when: ansible_distribution != "RedHat" 
@@ -40,7 +40,7 @@
       sshd_AllowTcpForwarding: yes
 
    - name: Install guest agent if virtualized
-     ansible.builtin.package:
+     ansible.builtin.dnf:
        name: qemu-guest-agent
        state: present
      when: ansible_virtualization_role == "guest"

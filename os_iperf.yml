@@ -5,7 +5,7 @@
   tasks:
 
     - name: Install iperf3
-      ansible.builtin.package:
+      ansible.builtin.dnf:
         name: iperf3
         state: present
 

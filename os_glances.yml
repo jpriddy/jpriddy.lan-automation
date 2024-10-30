@@ -5,7 +5,7 @@
   tasks:
 
     - name: Install glances
-      ansible.builtin.package:
+      ansible.builtin.dnf:
         name: glances
         state: present
 
