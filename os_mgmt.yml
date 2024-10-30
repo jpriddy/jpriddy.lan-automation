@@ -20,7 +20,11 @@
           - cockpit-ws
           - cockpit-kdump
           - cockpit-sosreport
-          - cockpit-pcp
+          - cockpit-system
+          - cockpit-navigator
+          - cockpit-file
+          - cockpit-doc
+        #  - cockpit-pcp
         cockpit_config:
           WebService:
             LoginTitle: "Cockpit Web Management - welcome to jpriddy.lan"
