@@ -31,6 +31,15 @@
       sshd_ChallengeResponseAuthentication: yes
       sshd_AllowTcpForwarding: yes
 
+    - name: Create/replace sssd.conf
+      ansible.builtin.template:
+        src: templates/sssd.conf.j2
+        mode: '0600'
+        dest: /etc/sssd/sssd.conf 
+
+
+
+
    - name: Install guest agent if virtualized
      ansible.builtin.dnf:
        name: qemu-guest-agent
