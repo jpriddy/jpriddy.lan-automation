@@ -1,7 +1,7 @@
 #rename_this_to_cockpit
 
 ---
-- name: Setup various management tooling... cockpit for now
+- name: Setup various management tooling
   hosts: all
   become: true
   tasks:
@@ -22,7 +22,7 @@
           - cockpit-sosreport
           - cockpit-system
           - cockpit-navigator
-          - cockpit-file
+          - cockpit-files
           - cockpit-doc
         #  - cockpit-pcp
         cockpit_config:
