@@ -8,13 +8,14 @@
       community.general.sudoers:
         commands: '%wheel  ALL=(ALL)       ALL'
         group: wheel
-        name: wheel_with_passwd
+        name: wheel-with-password
         state: absent
 
-    - name: Add rule to sudoers for no passwd with wheel group
+    - name: New wheel group to run ALL with no passwd
       community.general.sudoers:
-        commands: '%wheel ALL=(ALL) NOPASSWD: ALL'
+        name: wheel-no-password
         group: wheel
-        name: wheel_without_passwd
+        commands: ALL
+        nopassword: true
         state: present
  
