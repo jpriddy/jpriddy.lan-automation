@@ -11,12 +11,13 @@
       with_items:
         - tuned
 
+    - name: Setup tuned for auto_profile
+      ansible.builtin.command:
+        cmd: "/usr/sbin/tuned-adm auto_profile"
+
     - name: Enable and start tuned
       ansible.builtin.systemd:
         name: tuned
         enabled: true
-        state: restarted
+        state: reloaded
 
-    - name: Setup tuned for auto_profile
-      ansible.builtin.command:
-        cmd: "/usr/sbin/tuned-adm auto_profile"

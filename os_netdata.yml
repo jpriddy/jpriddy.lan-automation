@@ -19,7 +19,7 @@
     - name: Run it
       ansible.builtin.command: /tmp/netdata_kickstart.sh  --reinstall-even-if-unsafe --dont-wait --native-only --stable-channel --no-updates --disable-telemetry
       register: output
-      changed_when: my_output.rc != 0
+      #changed_when: my_output.rc != 0
 
     #- name: Replace config file  
     #  ansible.builtin.template:
@@ -32,4 +32,4 @@
     - name: Restart Netdata
       ansible.builtin.service:
         name: netdata
-        state: restarted
+        state: reloaded

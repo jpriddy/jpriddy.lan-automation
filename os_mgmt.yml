@@ -34,7 +34,7 @@
             LoginTitle: "Cockpit Web Management - welcome to jpriddy.lan"
             MaxStartups: 20
           Session:
-            IdleTimeout: 15
+            IdleTimeout: 0
             Banner: /etc/motd # see here: https://cockpit-project.org/faq.html#error-message-about-being-offline
         cockpit_enabled: true
         # cockpit_port: 9090 

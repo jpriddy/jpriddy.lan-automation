@@ -2,6 +2,7 @@
 - name: Setup terminal logging
   hosts: all
   become: true
+  
   tasks:
     - name: Use system role to setup terminal logging for all users
       ansible.builtin.include_role:
