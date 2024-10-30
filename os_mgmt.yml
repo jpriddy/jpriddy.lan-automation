@@ -22,9 +22,13 @@
           - cockpit-sosreport
           - cockpit-system
           - cockpit-navigator
-          - cockpit-files
           - cockpit-doc
-        #  - cockpit-pcp
+          - cockpit-session-recording
+          # less features than cockpit-navigator
+          #- cockpit-files
+          # removed with fedora 41?
+          #  - cockpit-pcp
+        
         cockpit_config:
           WebService:
             LoginTitle: "Cockpit Web Management - welcome to jpriddy.lan"
