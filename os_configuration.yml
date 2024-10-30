@@ -10,7 +10,7 @@
       state: present
      with_items:
       - bash-completion
-      - mlocate
+      #doesnt exist on f41 - mlocate
       - rsync
       - nmap
       - tuned      
