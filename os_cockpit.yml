@@ -1,9 +1,7 @@
-#rename_this_to_cockpit
-
 ---
 - name: Setup various management tooling
   hosts: all
-  become: true
+
   tasks:
 
     - name: Use system role to set up cockpit
@@ -23,11 +21,7 @@
           - cockpit-navigator
           - cockpit-doc
           - cockpit-session-recording
-          # less features than cockpit-navigator
-          #- cockpit-files
-          # removed with fedora 41?
-          #  - cockpit-pcp
-        
+          - cockpit-files
         cockpit_config:
           WebService:
             LoginTitle: "Cockpit Web Management - welcome to jpriddy.lan"
@@ -36,6 +30,6 @@
             IdleTimeout: 0
             Banner: /etc/motd # see here: https://cockpit-project.org/faq.html#error-message-about-being-offline
         cockpit_enabled: true
-        # cockpit_port: 9090 
+        cockpit_port: 9090 
         # ^^ need an offramp for redhat satellite and 
         # other services that may use 9090

@@ -1,10 +1,9 @@
+---
 - name: Add user jpriddy with password
   hosts: all
   become: yes
 
-
-#using custom creds stored in controler 
-  tasks:
+  tasks:   #using custom creds stored in controler 
     - name: Create user jpriddy, set password and add to users and wheel groups
       ansible.builtin.user:
         name: "{{ user_account_username }}"

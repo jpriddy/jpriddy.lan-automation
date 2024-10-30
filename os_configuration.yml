@@ -2,6 +2,8 @@
 - name: OS Configuration
   hosts: all
   become: true
+  gather_facts: true
+
   tasks:
 
    - name: Install a bunch of packages from the base repos
@@ -24,7 +26,6 @@
      ansible.builtin.include_role:
       name: redhat.rhel_system_roles.sshd
      vars:
-      sshd_PermitRootLogin: yes
       sshd_X11Forwarding: yes
       sshd_GSSAPIAuthentication: yes
       sshd_ChallengeResponseAuthentication: yes

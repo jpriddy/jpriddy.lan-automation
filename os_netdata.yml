@@ -1,7 +1,6 @@
 ---
 - name: Install Netdata
   hosts: all
-  become: true
 
   tasks:
 
@@ -21,13 +20,13 @@
       register: output
       #changed_when: my_output.rc != 0
 
-    #- name: Replace config file  
-    #  ansible.builtin.template:
-    #    src: templates/netdata.conf.j2
-    #    dest: /etc/netdata/netdata.conf
-    #    owner: root
-    #    group: root
-    #    mode: u=wrx,g=rx,o=r,+x
+    - name: Replace config file  
+      ansible.builtin.template:
+        src: templates/netdata.conf.j2
+        dest: /etc/netdata/netdata.conf
+        owner: root
+        group: root
+        mode: '0644'
 
     - name: Restart Netdata
       ansible.builtin.service:

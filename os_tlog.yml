@@ -1,7 +1,6 @@
 ---
 - name: Setup terminal logging
   hosts: all
-  become: true
 
   tasks:
     - name: Use system role to setup terminal logging for all users

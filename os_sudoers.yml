@@ -1,7 +1,7 @@
 ---
 - name: Modify sudoers configuration
   hosts: all
-  become: true
+
   tasks:
     
     - name: Remove default rule for wheel group

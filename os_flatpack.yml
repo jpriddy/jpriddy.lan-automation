@@ -2,6 +2,7 @@
 - name: Setup flathub/pack
   hosts: all
   become: true
+  
   tasks:
 
     - name: Ensure flatpak is installed

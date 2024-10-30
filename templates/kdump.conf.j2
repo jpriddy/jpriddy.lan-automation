@@ -1,0 +1,8 @@
+#ansible managed
+auto_reset_crashkernel yes
+nfs 192.168.1.30:/volume2/crash
+path /
+core_collector makedumpfile -l --message-level 7 -d 31
+failure_action reboot
+final_action reboot
+force_rebuild 1

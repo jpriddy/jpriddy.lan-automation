@@ -1,7 +1,6 @@
+---
 - name: Mount NFS shares from synology
   hosts: all
-  become: yes
-  
 
   vars:
     nfs_mounts:
@@ -22,7 +21,6 @@
       ansible.builtin.dnf:
         name: nfs-utils
         state: present
-
  
     - name: Mount NFS shares
       ansible.posix.mount:

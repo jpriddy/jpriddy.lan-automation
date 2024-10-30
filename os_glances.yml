@@ -1,7 +1,7 @@
 ---
 - name: Configure monitoring and metrics gathering
   hosts: all
-  become: true
+  
   tasks:
 
     - name: Install glances
@@ -9,15 +9,15 @@
         name: glances
         state: present
 
-    - name: Replace glances systemd unit file with one that enables server mode
-      ansible.builtin.copy:
-        src: configs/glances.service
-        dest: /etc/systemd/system/multi-user.target.wants/glances.service
+    - name: Replacing systemd service file
+      ansible.builtin.template:
+        src: templates/glances.service.j2
         mode: '0644'
+        dest: /etc/systemd/system/multi-user.target.wants/glances.service
 
-
-    - name: Enable and start glances
+    - name: Reload glances
       ansible.builtin.systemd:
         name: glances
         daemon_reload: true
         state: reloaded
+        enabled: true
