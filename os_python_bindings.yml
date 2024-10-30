@@ -1,8 +1,14 @@
 ---
-- name: Install python3-libdnf5 to resolve binding issues
+- name: Install packagse for binding issues
   hosts: all
   become: yes
   tasks:
 
-    - name: Install python3-libdnf5 to resolve binding issues
-      shell: dnf install -y python3-libdnf5
+    - name: Install python related packages with a shell to resolve binding issues
+      shell: dnf install -y python3-libdnf5 python3-dnf python3-libselinux python3-dnf-plugin-rpmconf python3-deltarpm python3-pyrpm python3-rpm python3-pyrpmd python3-rpmconf
+
+    #- name: Install python bindings so ansible will work on fedora
+    #  ansible.builtin.package:
+    #    name: python3-libselinux # required on fedora @base for ansible to work
+    #    state: present
+    #  when: ansible_distribution == 'Fedora'
