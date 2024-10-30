@@ -15,6 +15,15 @@
       - { name: document, server_path: /volume2/document }
       - { name: video, server_path: /volume2/video }
 
+   - name: Install a bunch of packages from the base repos
+     ansible.builtin.package:
+      name: "{{ item }}"
+      state: present
+     with_items:
+      - nfs-utils
+
+
+
   tasks:
     - name: Mount NFS shares
       ansible.posix.mount:

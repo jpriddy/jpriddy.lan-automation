@@ -20,5 +20,4 @@
       ansible.builtin.systemd:
         name: glances
         daemon_reload: true
-        enabled: true
         state: reloaded

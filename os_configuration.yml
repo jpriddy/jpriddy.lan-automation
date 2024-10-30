@@ -13,9 +13,6 @@
       #doesnt exist on f41 - mlocate
       - rsync
       - nmap
-      - tuned      
-      - cifs-utils
-      - nfs-utils
 
    - name: Install packages that are not on RHEL
      ansible.builtin.package:
