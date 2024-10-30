@@ -20,7 +20,6 @@
           - cockpit-ws
           - cockpit-kdump
           - cockpit-sosreport
-          - cockpit-system
           - cockpit-navigator
           - cockpit-doc
           - cockpit-session-recording
