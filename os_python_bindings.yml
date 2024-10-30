@@ -5,7 +5,7 @@
   tasks:
 
     - name: Install python related packages with a shell to resolve binding issues
-      shell: dnf install -y python3-libdnf5 python3-dnf python3-libselinux python3-dnf-plugin-rpmconf python3-deltarpm python3-pyrpm python3-rpmpython3-rpmconf
+      shell: dnf install -y python3-libdnf5 python3-dnf python3-libselinux python3-dnf-plugin-rpmconf python3-deltarpm python3-pyrpm
 
     #- name: Install python bindings so ansible will work on fedora
     #  ansible.builtin.package:
