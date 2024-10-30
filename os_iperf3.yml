@@ -13,7 +13,7 @@
       ansible.builtin.template:
         src: templates/iperf3.service.j2
         mode: '0644'
-        dest: /etc/systemd/system/multi-user.target.wants/iperf3.service       
+        dest: /usr/lib/systemd/system/iperf3.service       
 
     - name: Pick up new iperf3 service with systemd and then enable/start
       ansible.builtin.systemd:

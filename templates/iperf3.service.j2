@@ -6,6 +6,7 @@ After=syslog.target network.target auditd.service
 [Service]
 ExecStart=/usr/bin/iperf3 -s
 ExecStop=/usr/bin/killall -9 iperf3
+Restart=on-abort
 
 [Install]
 WantedBy=multi-user.target
