@@ -19,5 +19,5 @@
       ansible.builtin.systemd:
         name: tuned
         enabled: true
-        state: reloaded
+        state: started
 

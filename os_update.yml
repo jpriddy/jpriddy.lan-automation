@@ -3,11 +3,6 @@
   become: true
   tasks:
 
-    #- name: Universal package update
-    #  ansible.builtin.package:
-    #    name: '*'
-    #    state: present
-
     - name: Update system packages
       dnf: name='*' state=latest
       when:

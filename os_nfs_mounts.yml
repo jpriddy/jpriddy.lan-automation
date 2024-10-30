@@ -1,6 +1,7 @@
 - name: Mount NFS shares from synology
   hosts: all
   become: yes
+  
 
   vars:
     nfs_mounts:
@@ -14,17 +15,15 @@
       - { name: music, server_path: /volume2/music }
       - { name: document, server_path: /volume2/document }
       - { name: video, server_path: /volume2/video }
-
-   - name: Install a bunch of packages from the base repos
-     ansible.builtin.package:
-      name: "{{ item }}"
-      state: present
-     with_items:
-      - nfs-utils
-
-
-
+  
   tasks:
+
+    - name: Ensure nfs-utils is installed
+      ansible.builtin.package:
+        name: nfs-utils
+        state: present
+
+ 
     - name: Mount NFS shares
       ansible.posix.mount:
         src: "192.168.1.30:{{ item.server_path }}"
