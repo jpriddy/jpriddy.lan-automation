@@ -19,7 +19,7 @@
   tasks:
 
     - name: Ensure nfs-utils is installed
-      ansible.builtin.package:
+      ansible.builtin.dnf:
         name: nfs-utils
         state: present
 
