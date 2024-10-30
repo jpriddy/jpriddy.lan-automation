@@ -1,0 +1,8 @@
+---
+- name: Install python3-libdnf5 to resolve binding issues
+  hosts: all
+  become: yes
+  tasks:
+
+    - name: Install python3-libdnf5 to resolve binding issues
+      shell: dnf install -y python3-libdnf5
