@@ -6,7 +6,7 @@
     
     - name: Remove default rule for wheel group
       community.general.sudoers:
-        commands: '%wheel ALL=(ALL) ALL'
+        commands: '%wheel ALL=(ALL) ALL !requiretty'
         group: wheel
         name: wheel-with-password
         state: absent
