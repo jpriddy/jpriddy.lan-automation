@@ -31,4 +31,4 @@
     - name: Restart Netdata
       ansible.builtin.service:
         name: netdata
-        state: reloaded
+        state: restarted
