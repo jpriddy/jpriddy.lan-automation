@@ -15,12 +15,12 @@
         dest: /tmp/netdata_kickstart.sh
         mode: +x
 
-    - name: Run it
-      ansible.builtin.command: /tmp/netdata_kickstart.sh  --reinstall-even-if-unsafe --dont-wait --native-only --stable-channel --no-updates --disable-telemetry
+    - name: Run the installer
+      ansible.builtin.command: /tmp/netdata_kickstart.sh  --reinstall --dont-wait --auto-update --stable-channel --disable-telemetry --non-interactive
       register: output
       #changed_when: my_output.rc != 0
 
-    - name: Replace config file  
+    - name: Replace config file
       ansible.builtin.template:
         src: templates/netdata.conf.j2
         dest: /etc/netdata/netdata.conf

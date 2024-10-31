@@ -1,7 +1,10 @@
 # managed by ansible
 [global]
-  #hostname = {{ inventory_hostname }} #should be auto detected
+  hostname = {{ inventory_hostname }} #should be auto detected
   dbengine multihost disk space: 1024
+  agent_history: 3600
+  agent_policy: idle
+  oom_score: 1000
 
 [web]
   mode: static-threaded
