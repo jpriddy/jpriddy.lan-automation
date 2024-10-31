@@ -6,8 +6,8 @@
 
    - name: Install autofs
      ansible.builtin.dnf:
-       name: autofs
-       state: present
+      name: autofs
+      state: present
 
    - name: Start and enable autofs
      ansible.builtin.systemd:

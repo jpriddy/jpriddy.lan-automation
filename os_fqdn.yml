@@ -1,7 +1,7 @@
 ---
 - name: Set hostname of server
   hosts: all
-  
+
   tasks:
 
     - name: Set active hostname

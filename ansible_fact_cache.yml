@@ -1,6 +1,3 @@
 ---
 - name: Update facts cache
   hosts: all
-  #tasks:
-  #  - name: Pinging server to update facts cache
-  #    ansible.builtin.ping:
