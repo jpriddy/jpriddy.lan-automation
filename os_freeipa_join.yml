@@ -1,7 +1,7 @@
 ---
 - name: Join IPA domain
   hosts: all
-  
+
   tasks:
 
     - name: Install required python packages
