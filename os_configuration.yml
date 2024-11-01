@@ -9,16 +9,16 @@
         name: "{{ item }}"
         state: present
       with_items:
-      - bash-completion
-      - rsync
+        - bash-completion
+        - rsync
 
     - name: Configure timesync with system role
       ansible.builtin.include_role:
         name: redhat.rhel_system_roles.timesync
       vars:
-      timesync_ntp_servers:
-      - hostname: 192.168.1.1
-      iburst: true
+        timesync_ntp_servers:
+          - hostname: 192.168.1.1
+            iburst: true
 
     - name: Customize ssh server with system role redhat.rhel_system_roles.sshd
       ansible.builtin.include_role:
@@ -33,7 +33,7 @@
       ansible.builtin.template:
         src: templates/sssd.conf.j2
         mode: '0600'
-        dest: /etc/sssd/sssd.conf 
+        dest: /etc/sssd/sssd.conf
 
     - name: Install guest agent if virtualized
       ansible.builtin.dnf:
