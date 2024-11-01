@@ -4,7 +4,7 @@
 
   tasks:
 
-    - name: Install a bunch of packages from the base repos
+    - name: Install packages from the base repos
       ansible.builtin.dnf:
         name: "{{ item }}"
         state: present
