@@ -7,7 +7,7 @@
   |___/_/                   /___/               
 
        OS          : {{ ansible_distribution }} {{ ansible_distribution_version }}
-       IP address  : {{ ansible_eth0.ipv4.address }}
+       IP address  : {{ ansible_default_ipv4 }}
        System type : {{ ansible_system }}
        Virt type   : {{ ansible_virtualization_type }} 
  ------------------------------------------------
