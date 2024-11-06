@@ -18,6 +18,6 @@
     - name: Pick up new iperf3 service with systemd and then enable/start
       ansible.builtin.systemd:
         name: iperf3
-        state: reloaded
+        state: restarted
         daemon_reload: true
         enabled: true

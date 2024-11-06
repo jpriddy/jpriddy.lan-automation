@@ -19,4 +19,4 @@
       ansible.builtin.systemd:
         name: glances
         daemon_reload: true
-        state: reloaded
+        state: restarted
