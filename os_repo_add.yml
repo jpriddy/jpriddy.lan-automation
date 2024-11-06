@@ -1,7 +1,7 @@
 ---
 - name: Configure additional repos for Fedora
   hosts: all
-  become: true
+  
   tasks:
 
     - name: Import gpg keys for free rpmfusion

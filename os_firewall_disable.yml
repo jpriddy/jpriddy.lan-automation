@@ -2,7 +2,9 @@
 - name: Stop and disable firewall
   hosts: all
   become: true
+  
   tasks:
+    
     - name: Stop and disable the firewalld systemd service
       ansible.builtin.systemd:
         name: firewalld

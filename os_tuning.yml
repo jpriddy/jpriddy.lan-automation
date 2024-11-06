@@ -1,22 +1,23 @@
 ---
 - name: Configure os tuning 
   hosts: all
-  become: true
+  
   tasks:
 
     - name: Install packages
-      ansible.builtin.package:
+      ansible.builtin.dnf:
         name: "{{ item }}"
         state: present
       with_items:
         - tuned
 
+    - name: Setup tuned for auto_profile
+      ansible.builtin.command:
+        cmd: "/usr/sbin/tuned-adm auto_profile"
+
     - name: Enable and start tuned
       ansible.builtin.systemd:
         name: tuned
         enabled: true
-        state: restarted
+        state: started
 
-    - name: Setup tuned for auto_profile
-      ansible.builtin.command:
-        cmd: "/usr/sbin/tuned-adm auto_profile"

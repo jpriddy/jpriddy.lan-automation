@@ -1,7 +1,7 @@
 ---
 ansible-navigator:
   logging:
-    level: debug
+    level: error
     append: false
     file: $PWD/.logs/ansible-navigator.log
 

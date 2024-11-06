@@ -1,11 +1,13 @@
 ---
 - name: Setup terminal logging
   hosts: all
-  become: true
+
   tasks:
     - name: Use system role to setup terminal logging for all users
       ansible.builtin.include_role:
         name: redhat.rhel_system_roles.tlog
       vars:
-        tlog_scope_sssd: all
+        tlog_scope_sssd: some
         tlog_use_sssd: true
+        tlog_groups_sssd: wheel
+        tlog_users_sssd: root

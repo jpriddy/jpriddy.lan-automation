@@ -1,0 +1,21 @@
+---
+- name: Modify sudoers configuration
+  hosts: all
+
+  tasks:
+    
+    - name: Remove default rule for wheel group
+      community.general.sudoers:
+        commands: '%wheel ALL=(ALL) ALL !requiretty'
+        group: wheel
+        name: wheel-with-password
+        state: absent
+
+    - name: New wheel group to run ALL with no passwd
+      community.general.sudoers:
+        name: wheel-no-password
+        group: wheel
+        commands: ALL
+        nopassword: true
+        state: present
+ 

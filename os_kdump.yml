@@ -1,11 +1,11 @@
 ---
 - name: Configure kdump to capture core dumps
   hosts: all
-  become: true
+
   tasks:
 
     - name: Install kexec-tools, crash, and nfs-utils
-      ansible.builtin.package:
+      ansible.builtin.dnf:
         name: "{{ item }}"
         state: present
       with_items:
@@ -14,20 +14,11 @@
         - nfs-utils
       when: "'RedHat' in ansible_distribution_file_variety"
 
-    - name: Create kdump.conf
-      ansible.builtin.copy:
-        dest: "/etc/kdump.conf"
+    - name: Create kdump.conf at /etc
+      ansible.builtin.template:
+        src: templates/kdump.conf.j2
         mode: '0644'
-        owner: "root"
-        group: "root"
-        content: |
-          auto_reset_crashkernel yes
-          nfs 192.168.1.30:/volume2/crash
-          path /
-          core_collector makedumpfile -l --message-level 7 -d 31
-          failure_action reboot
-          final_action reboot
-          force_rebuild 1
+        dest: /etc/kdump.conf
 
     - name: Mount the nfs volume
       ansible.posix.mount:

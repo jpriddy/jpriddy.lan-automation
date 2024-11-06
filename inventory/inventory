@@ -16,21 +16,21 @@ appliances:
 network_mikrotik:
   hosts:
     bassw00:
-      ansible_host: "192.168.1.10"
+      ansible_host: "bassw00.jpriddy.lan"
     bassw01:
-      ansible_host: "192.168.1.11"
+      ansible_host: "bassw01.jpriddy.lan"
     bassw02:
-      ansible_host: "192.168.1.12"
+      ansible_host: "bassw02.jpriddy.lan"
     garsw00:
-      ansible_host: "192.168.1.14"
+      ansible_host: "garsw00.jpriddy.lan"
     garsw01:
-      ansible_host: "192.168.1.15"
+      ansible_host: "garsw01.jpriddy.lan"
     offsw00:
-      ansible_host: "192.168.1.18"
+      ansible_host: "offsw00.jpriddy.lan"
     offsw01:
-      ansible_host: "192.168.1.19"
+      ansible_host: "offsw02.jpriddy.lan"
     batsw00:
-      ansible_host: "192.168.1.23"
+      ansible_host: "batsw00.jpriddy.lan"
   vars:
     ansible_connection: "ansible.netcommon.network_cli"
     ansible_network_os: "community.routeros.routeros"
@@ -39,65 +39,72 @@ network_mikrotik:
 network_ruckus:
   hosts:
     ap01:
-      ansible_host: "192.168.1.26"
+      ansible_host: "ap01.jpriddy.lan"
     ap02:
-      ansible_host: "192.168.1.27"
+      ansible_host: "ap02.jpriddy.lan"
     ap03:
-      ansible_host: "192.168.1.28"
+      ansible_host: "ap03.jpriddy.lan"
 
-linux_clients:
+fedora_clients:
   hosts:
     xps:
-      ansible_host: "192.168.1.107"
+      ansible_host: "xpa.jpriddy.lan"
     bas:
-      ansible_host: "192.168.1.27"
+      ansible_host: "bas.jpriddy.lan"
     gar:
-      ansible_host: "192.168.1.28"
+      ansible_host: "bas.jpriddy.lan"
 
 mac_clients:
   hosts:
     mac:
-      ansible_host: "192.168.1.109"
+      ansible_host: "mac.jpriddy.lan"
       
 kickstart_servers:
   hosts:
-    kickstart:
-      ansible_host: "192.168.1.218"
+    fedora:
+      ansible_host: "fedora.jpriddy.lan"
       ansible_user: "root"
-      ansible_ssh_pass: "installer"  #non-standard password
-    kickstart2:
-      ansible_host: "192.168.1.219"
+      ansible_ssh_pass: "fedora"  #matches kickstart
+    rhel:
+      ansible_host: "rhel.jpriddy.lan"
       ansible_user: "root"
-      ansible_ssh_pass: "installer"  #non-standard password
+      ansible_ssh_pass: "rhel"  #matches kickstart
       
-linux_servers:
+fedora_servers:
   hosts:
     media:
-      ansible_host: "192.168.1.150"
-    virt1:
-      ansible_host: "192.168.1.235"
+      ansible_host: "media.jpriddy.lan"
     containers:
-      ansible_host: "192.168.1.155"
-    idm1:
-      ansible_host: "192.168.1.131"
-    idm2:
-      ansible_host: "192.168.1.132" 
-    db1:
-      ansible_host: "192.168.1.157" 
+      ansible_host: "containers.jpriddy.lan"
+
+virt_servers:
+  hosts:
+    virt1:
+      ansible_host: "virt1.jpriddy.lan"
+
+
+rhel_servers:
+  hosts:    
+#    idm1:
+#      ansible_host: "idm1.jpriddy.lan"
+#    idm2:
+#      ansible_host: "idm2.jpriddy.lan" 
+    sat:
+      ansible_host: "sat.jpriddy.lan" 
     aap:
-      ansible_host: "192.168.1.34"
+      ansible_host: "aap.jpriddy.lan"
     
 windows_servers:
   hosts:
     dc1:
-      ansible_host: "192.168.1.161"
+      ansible_host: "dc1.jpriddy.lan"
     dc2:
-      ansible_host: "192.168.1.162"
+      ansible_host: "dc2.jpriddy.lan"
 
 windows_clients:
   hosts:
     win11:
-      ansible_host: "192.168.1.153"  ###change me
+      ansible_host: "win11.jpriddy.lan"
     desktop:
-      ansible_host: "192.168.1.102"
+      ansible_host: "desktop.jpriddy.lan"
 

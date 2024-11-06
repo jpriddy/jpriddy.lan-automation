@@ -1,0 +1,14 @@
+---
+- name: Add user_account custom cred to host
+  hosts: all
+
+  tasks:
+    - name: Create account from custom credentials, set password, and add to groups wheel and users
+      ansible.builtin.user:
+        name: "{{ user_account_username }}"
+        append: true
+        generate_ssh_key: true
+        password: "{{ user_account_password }}"
+        groups:
+          - users
+          - wheel

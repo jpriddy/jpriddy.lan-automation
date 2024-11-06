@@ -1,7 +1,7 @@
 ---
 - name: Configure logging
   hosts: all
-  become: true
+
   tasks:
   
     - name: Use system role to configure journald to take up max 256mb

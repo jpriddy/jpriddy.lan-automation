@@ -1,0 +1,3 @@
+---
+- name: Update facts cache
+  hosts: all

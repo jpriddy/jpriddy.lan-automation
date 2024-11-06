@@ -1,10 +1,8 @@
 ---
 - name: Configure monitoring and metrics gathering
   hosts: all
-  become: true
+  
   tasks:
-
-
 
     - name: Use redhat system role to set up a month of metrics
       ansible.builtin.include_role:

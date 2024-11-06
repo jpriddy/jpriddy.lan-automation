@@ -1,12 +1,7 @@
 - name: Update packages
   hosts: all
-  become: true
-  tasks:
 
-    #- name: Universal package update
-    #  ansible.builtin.package:
-    #    name: '*'
-    #    state: present
+  tasks:
 
     - name: Update system packages
       dnf: name='*' state=latest
