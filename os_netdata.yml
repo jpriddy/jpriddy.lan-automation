@@ -9,6 +9,7 @@
         name: openssl
         state: present
 
+#failing saying the package doesnt exist -- repo config issue?
 #    - name: Download the installation script from internet
 #      ansible.builtin.get_url:
 #        url: https://my-netdata.io/kickstart.sh
