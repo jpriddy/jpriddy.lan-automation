@@ -4,21 +4,37 @@
 
   tasks:
 
-    - name: Install openssl
+    - name: Install openssl prereq
       ansible.builtin.dnf:
         name: openssl
         state: present
 
-    - name: Download the installation script from internet
-      ansible.builtin.get_url:
-        url: https://my-netdata.io/kickstart.sh
-        dest: /tmp/netdata_kickstart.sh
-        mode: +x
+#    - name: Download the installation script from internet
+#      ansible.builtin.get_url:
+#        url: https://my-netdata.io/kickstart.sh
+#        dest: /tmp/netdata_kickstart.sh
+#        mode: +x
+#
+#    - name: Run the installer
+#      ansible.builtin.command: /tmp/netdata_kickstart.sh  --no-updates --native-only --dont-wait --disable-telemetry --non-interactive --nightly-channel
+#      register: output
+#      #changed_when: my_output.rc != 0
 
-    - name: Run the installer
-      ansible.builtin.command: /tmp/netdata_kickstart.sh  --no-updates --native-only --dont-wait --disable-telemetry --non-interactive --nightly-channel
-      register: output
-      #changed_when: my_output.rc != 0
+    - name: Download the repo config rpm
+      get_url:
+        url:  https://repo.netdata.cloud/repos/repoconfig/fedora/41/x86_64/netdata-repo-edge-4-1.noarch.rpm
+        dest: /tmp/netdata-repo-edge-4-1.noarch.rpm
+        mode: '0644'
+
+    - name: Install repo config
+      ansible.builtin.dnf:
+        name: /tmp/netdata-repo-edge-4-1.noarch.rpm
+        state: present
+
+    - name: Install netdata
+      ansible.builtin.dnf:
+        name: netdata
+        state: present
 
     - name: Replace config file
       ansible.builtin.template:
