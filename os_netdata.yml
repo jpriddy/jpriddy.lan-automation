@@ -16,7 +16,7 @@
         mode: +x
 
     - name: Run the installer
-      ansible.builtin.command: /tmp/netdata_kickstart.sh  --reinstall --dont-wait --auto-update --stable-channel --disable-telemetry --non-interactive
+      ansible.builtin.command: /tmp/netdata_kickstart.sh  --native-only --dont-wait --disable-telemetry --non-interactive
       register: output
       #changed_when: my_output.rc != 0
 
