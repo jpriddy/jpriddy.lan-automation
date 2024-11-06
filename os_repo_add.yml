@@ -9,12 +9,12 @@
         key: https://download1.rpmfusion.org/free/fedora/RPM-GPG-KEY-rpmfusion-free-fedora-2020
         state: present
       when: ansible_distribution == 'Fedora'
-      
-    - name: Import gpg keys for nonfree rpmfusion
+
+    - name: Import gpg keys for free rpmfusion
       ansible.builtin.rpm_key:
-        key: https://download1.rpmfusion.org/free/fedora/RPM-GPG-KEY-rpmfusion-nonfree-fedora-2020
+        key: https://download1.rpmfusion.org/nonfree/fedora/RPM-GPG-KEY-rpmfusion-nonfree-fedora-2020
         state: present
-      when: ansible_distribution == 'Fedora'
+      when: ansible_distribution == 'Fedora'    
 
 
     - name: Install repo file for rpmfusion free
@@ -25,6 +25,6 @@
 
     - name: Install repo file for rpmfusion nonfree
       ansible.builtin.dnf:
-        name: https://download1.rpmfusion.org/free/fedora/rpmfusion-nonfree-release-{{ansible_distribution_major_version}}.noarch.rpm
+        name: https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ansible_distribution_major_version}}.noarch.rpm
         state: present
       when: ansible_distribution == 'Fedora'
