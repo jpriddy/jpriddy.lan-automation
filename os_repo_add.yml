@@ -9,14 +9,13 @@
       ansible.builtin.rpm_key:
         key: "{{ item }}"
         state: present
-      with_items: 
+      with_items:
         - "https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-fedora-2020"
         - "https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora-2020"
       when: ansible_distribution == 'Fedora'
 
-
     - name: Install rpmfusion repo packages
-      dnf:
+      ansible.builtin.dnf:
         name: "{{ item }}"
         state: present
         validate_certs: false
@@ -24,4 +23,3 @@
         - "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_version }}.noarch.rpm"
         - "https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_version }}.noarch.rpm"
       when: ansible_distribution == 'Fedora'
-      

@@ -7,7 +7,7 @@
       ansible.builtin.include_role:
         name: redhat.rhel_system_roles.tlog
       vars:
-        tlog_scope_sssd: some
+        tlog_scope_sssd: all
         tlog_use_sssd: true
-        tlog_groups_sssd: wheel
-        tlog_users_sssd: root
+        #tlog_groups_sssd: wheel
+        #tlog_users_sssd: root
