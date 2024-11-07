@@ -1,30 +1,17 @@
 {
-  "name": "ansible-dev-container-podman",
+  "name": "ansible-dev-container-codespaces",
   "image": "ghcr.io/ansible/community-ansible-dev-tools:latest",
   "containerUser": "root",
   "runArgs": [
-    "--cap-add=SYS_ADMIN",
-    "--cap-add=SYS_RESOURCE",
+    "--privileged",
     "--device",
     "/dev/fuse",
-    "--security-opt",
-    "seccomp=unconfined",
-    "--security-opt",
-    "label=disable",
-    "--security-opt",
-    "apparmor=unconfined",
-    "--userns=host",
-    "--hostname=ansible-dev-container",
-    "--volume",
-    "ansible-dev-tools-container-storage:/var/lib/containers"
+    "--hostname=ansible-dev-container"
   ],
+  "updateRemoteUserUID": true,
   "customizations": {
     "vscode": {
-      "extensions": ["redhat.ansible", "redhat.vscode-redhat-account"]
+      "extensions": ["redhat.ansible"]
     }
-  },
-  "features": {
-    "ghcr.io/hspaans/devcontainer-features/ansible-lint:1": {},
-    "ghcr.io/devcontainers-extra/features/ansible:2": {}
   }
 }
