@@ -1,7 +1,7 @@
 #random additions
 .DS_Store
 
-
+*.swp
 .logs/*
 *.retry
 *.vault
