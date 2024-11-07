@@ -1,12 +1,13 @@
 ---
 - name: Configure additional repos for Fedora
   hosts: all
-
+  
+  
   tasks:
 
-    - name: Pause for 10 seconds to let rpm settle down (otherwise it fails with unable to install)
+    - name: Pause for 5 seconds to let rpm settle down (otherwise it fails with unable to install)
       pause:
-        seconds: 10
+        seconds: 5
     
     - name: Add rpmfustion repo gpg keys
       ansible.builtin.rpm_key:
@@ -26,3 +27,5 @@
         - "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_version }}.noarch.rpm"
         - "https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_version }}.noarch.rpm"
       when: ansible_distribution == 'Fedora'
+      register: result
+      debugger: on failed
