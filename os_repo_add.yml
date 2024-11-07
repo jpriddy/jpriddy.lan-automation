@@ -4,10 +4,9 @@
 
   tasks:
 
-    - name: Pause for 15 seconds to let rpm settle down
+    - name: Pause for 5 seconds to let rpm settle down (otherwise it fails with unable to install)
       pause:
-        seconds: 15
-    
+        seconds: 5
     
     - name: Add rpmfustion repo gpg keys
       ansible.builtin.rpm_key:
