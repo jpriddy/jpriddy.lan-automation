@@ -1,9 +1,8 @@
 ---
 - name: Configure additional repos for Fedora
   hosts: all
-  
-  tasks:
 
+  tasks:
 
     - name: Add rpmfustion repo gpg keys
       ansible.builtin.rpm_key:
