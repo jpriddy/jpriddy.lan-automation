@@ -6,7 +6,7 @@
 
     - name: Pause for 15 seconds to let rpm settle down
       pause:
-      seconds: 15
+        seconds: 15
     
     
     - name: Add rpmfustion repo gpg keys
