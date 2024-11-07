@@ -14,10 +14,10 @@
       when: ansible_distribution == 'Fedora'
 
     - name: Install rpmfusion repo packages
-      #ansible.builtin.dnf:   ##shows a fail for some reason even though it works?
-      #  name: "{{ item }}"
-      #  state: present
-      command: "rpm -ivh {{ item }}"
+      ansible.builtin.dnf:
+        name: "{{ item }}"
+        state: present
+      #command: "rpm -ivh {{ item }}"
       with_items:
         - "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_version }}.noarch.rpm"
         - "https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_version }}.noarch.rpm"
