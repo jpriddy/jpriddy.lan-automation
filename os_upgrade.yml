@@ -4,9 +4,10 @@
   become: true
 
   tasks:
-      - name: Download the packages
-        ansible.builtin.command: dnf system-upgrade --releasever=latest doanload
-        
+      #- name: Download the packages
+      #  ansible.builtin.command: dnf system-upgrade --releasever=latest download
+      #  latest does not work...
+
       - name: Upgrade and reboot
         ansible.builtin.command: sudo dnf system-upgrade reboot
 
