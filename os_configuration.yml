@@ -11,6 +11,7 @@
       with_items:
         - bash-completion
         - rsync
+        - realmd
 
     - name: Configure timesync with system role
       ansible.builtin.include_role:
