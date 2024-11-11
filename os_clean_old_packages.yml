@@ -1,41 +1,53 @@
 ---
-- name: Clean up and prepare Fedora system
+- name: Clean up, update, and prepare Fedora system
   hosts: all
   become: yes
-
+  
   tasks:
     - name: Install remove-retired-packages
-      ansible.builtin.dnf:
+      dnf:
         name: remove-retired-packages
         state: present
 
     - name: Run remove-retired-packages
-      ansible.builtin.command: remove-retired-packages
+      command: remove-retired-packages
       register: retired_packages_result
       changed_when: "'No retired packages found' not in retired_packages_result.stdout"
 
     - name: Remove duplicate packages
-      ansible.builtin.command: dnf remove --duplicates -y
+      command: dnf remove --duplicates -y
       register: remove_duplicates_result
       changed_when: remove_duplicates_result.rc == 0
 
     - name: Run dnf autoremove
-      ansible.builtin.dnf:
+      dnf:
         autoremove: yes
 
     - name: Install clean-rpm-gpg-pubkey
-      ansible.builtin.dnf:
+      dnf:
         name: clean-rpm-gpg-pubkey
         state: present
 
     - name: Run clean-rpm-gpg-pubkey
-      ansible.builtin.command: clean-rpm-gpg-pubkey
+      command: clean-rpm-gpg-pubkey
       register: clean_gpg_result
       changed_when: "'Nothing to do' not in clean_gpg_result.stdout"
 
+    - name: Run dnf distro-sync
+      command: dnf distro-sync -y
+      register: distro_sync_result
+      changed_when: distro_sync_result.rc == 0
+
+    - name: Run fixfiles -B onboot
+      command: fixfiles -B onboot
+      register: fixfiles_result
+      changed_when: fixfiles_result.rc == 0
+
     - name: Display results
-      ansible.builtin.debug:
+      debug:
         msg: 
           - "Retired packages: {{ retired_packages_result.stdout }}"
           - "Remove duplicates: {{ remove_duplicates_result.stdout }}"
           - "Clean GPG keys: {{ clean_gpg_result.stdout }}"
+          - "Distro sync: {{ distro_sync_result.stdout }}"
+          - "Fixfiles: {{ fixfiles_result.stdout }}"
