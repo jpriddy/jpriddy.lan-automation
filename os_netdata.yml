@@ -15,13 +15,13 @@
         state: present
       when: ansible_distribution == 'Fedora'
 
-    - name: Download netdata repo config rpm
+    - name: Download netdata repo config rpm for Fedora 41 <-- fix me and move me to stable
       ansible.builtin.get_url:
         url: https://repo.netdata.cloud/repos/repoconfig/fedora/41/x86_64/netdata-repo-edge-4-1.noarch.rpm
         dest: /tmp/netdata-repo-edge-4-1.noarch.rpm
         mode: '0644'
 
-    - name: Install repo config rpm for edge (no fedora 41 package yet in stable)
+    - name: Install repo config rpm for edge <-- fix me and move me to stable 
       ansible.builtin.dnf:
         name: /tmp/netdata-repo-edge-4-1.noarch.rpm
         validate_certs: false
