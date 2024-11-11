@@ -85,10 +85,6 @@ virt_servers:
 
 rhel_servers:
   hosts:    
-#    idm1:
-#      ansible_host: "idm1.jpriddy.lan"
-#    idm2:
-#      ansible_host: "idm2.jpriddy.lan" 
     sat:
       ansible_host: "sat.jpriddy.lan" 
     aap:
