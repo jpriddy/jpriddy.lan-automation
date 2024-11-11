@@ -48,7 +48,7 @@ network_ruckus:
 fedora_clients:
   hosts:
     xps:
-      ansible_host: "xpa.jpriddy.lan"
+      ansible_host: "xps.jpriddy.lan"
     bas:
       ansible_host: "bas.jpriddy.lan"
     gar:
