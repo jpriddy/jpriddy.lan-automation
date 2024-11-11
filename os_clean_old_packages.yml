@@ -2,39 +2,39 @@
 - name: Clean up and prepare Fedora system
   hosts: all
   become: yes
-  
+
   tasks:
     - name: Install remove-retired-packages
-      dnf:
+      ansible.builtin.dnf:
         name: remove-retired-packages
         state: present
 
     - name: Run remove-retired-packages
-      command: remove-retired-packages
+      ansible.builtin.command: remove-retired-packages
       register: retired_packages_result
       changed_when: "'No retired packages found' not in retired_packages_result.stdout"
 
     - name: Remove duplicate packages
-      command: dnf remove --duplicates -y
+      ansible.builtin.command: dnf remove --duplicates -y
       register: remove_duplicates_result
       changed_when: remove_duplicates_result.rc == 0
 
     - name: Run dnf autoremove
-      dnf:
+      ansible.builtin.dnf:
         autoremove: yes
 
     - name: Install clean-rpm-gpg-pubkey
-      dnf:
+      ansible.builtin.dnf:
         name: clean-rpm-gpg-pubkey
         state: present
 
     - name: Run clean-rpm-gpg-pubkey
-      command: clean-rpm-gpg-pubkey
+      ansible.builtin.command: clean-rpm-gpg-pubkey
       register: clean_gpg_result
       changed_when: "'Nothing to do' not in clean_gpg_result.stdout"
 
     - name: Display results
-      debug:
+      ansible.builtin.debug:
         msg: 
           - "Retired packages: {{ retired_packages_result.stdout }}"
           - "Remove duplicates: {{ remove_duplicates_result.stdout }}"
