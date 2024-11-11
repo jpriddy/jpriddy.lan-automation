@@ -12,11 +12,8 @@
 
     - name: Install tlog and cockpit-session-recording
       ansible.builtin.dnf:
-        name: "{{ item }}"
+        name: tlog
         state: present
-      with_items:
-        - tlog
-        - cockpit-session-recording
 
     - name: Setup sssd-session-recording.conf in drop dir
       ansible.builtin.template:
