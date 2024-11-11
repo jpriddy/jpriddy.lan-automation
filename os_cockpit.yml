@@ -20,7 +20,6 @@
           - cockpit-sosreport
           - cockpit-navigator
           - cockpit-doc
-          - cockpit-session-recording
           - cockpit-files
         cockpit_config:
           WebService:
@@ -28,6 +27,6 @@
             MaxStartups: 20
           Session:
             IdleTimeout: 0
-            Banner: /etc/motd # see here: https://cockpit-project.org/faq.html#error-message-about-being-offline
+          #  Banner: /etc/motd # see here: https://cockpit-project.org/faq.html#error-message-about-being-offline
         cockpit_enabled: true
         cockpit_port: 9090 # ^^ need an offramp for systems that already have something running on 9090 (satellite...) 

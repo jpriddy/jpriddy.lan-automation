@@ -3,28 +3,27 @@
 
   tasks:
 
-    - name: Update system packages
-      dnf: name='*' state=latest
+    - name: Update all packages
+      ansible.builtin.dnf: name='*' state=latest
       when:
         - ansible_os_family == "RedHat"
+    # - name: Install system updates for debian based hosts (apt)
+    #      ansible.builtin.apt:
+    #     name: '*'
+    #     state: present
+    #     update_cache: true
+    #   when:
+    #   - ansible_os_family == "Debian"
 
-    - name: Install system updates for debian based hosts (apt)
-      ansible.builtin.apt:
-        name: '*'
-        state: present
-        update_cache: true
-      when:
-        - ansible_os_family == "Debian"
-
-    - name: Install Windows updates
-      ansible.windows.win_updates:
-        category_names:
-          - SecurityUpdates
-          - CriticalUpdates
-          - DefinitionUpdates
-        state: installed
-      when:
-        - ansible_os_family == "Windows"
+    # - name: Install Windows updates
+    #   ansible.windows.win_updates:
+    #     category_names:
+    #       - SecurityUpdates
+    #       - CriticalUpdates
+    #       - DefinitionUpdates
+    #     state: installed
+    #   when:
+    #   - ansible_os_family == "Windows"
 
 #  - name: Install updates to homebrew
 #    homebrew:
