@@ -11,9 +11,7 @@
         dest: /etc/sssd/sssd.conf
 
     - name: Install tlog and cockpit-session-recording
-      ansible.builtin.dnf:
-        name: tlog
-        state: present
+      ansible.builtin.shell: "dnf install -y cockpit-session-recording tlog"
 
     - name: Setup sssd-session-recording.conf in drop dir
       ansible.builtin.template:
