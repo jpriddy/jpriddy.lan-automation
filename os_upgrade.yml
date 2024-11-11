@@ -1,0 +1,20 @@
+- name: Update Fedora System dry run
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Update system packages
+      ansible.builtin.dnf:
+        name: "*"
+        state: latest
+        update_cache: yes
+
+    - name: Install required packages for upgrade
+      ansible.builtin.dnf:
+        name:
+          - dnf-plugin-system-upgrade
+          - dnf-plugin-core
+        state: present
+
+    - name: Run system upgrade planning
+      ansible.builtin.command: dnf system-upgrade plan
