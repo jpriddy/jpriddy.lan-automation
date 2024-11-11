@@ -3,11 +3,32 @@
   hosts: all
 
   tasks:
-    - name: Use system role to setup terminal logging for all users
-      ansible.builtin.include_role:
-        name: redhat.rhel_system_roles.tlog
-      vars:
-        tlog_scope_sssd: all
-        tlog_use_sssd: true
-        #tlog_groups_sssd: wheel
-        #tlog_users_sssd: root
+
+    - name: Install tlog and cockpit-session-recording
+      ansible.builtin.dnf:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - tlog
+        - cockpit-session-recording
+
+    - name: Setup sssd-session-recording.conf in drop dir
+      ansible.builtin.template:
+        src: templates/sssd-session-recording.conf.j2
+        mode: '0600'
+        dest: /etc/sssd/conf.d/sssd-session-recording.conf
+
+    - name: Restart sssd to pickup new config
+      ansible.builtin.systemd:
+        name: sssd
+        state: restarted
+
+    ####doesnt work right, clobbers sssd...
+    # - name: Use system role to setup terminal logging for all users
+    #   ansible.builtin.include_role:
+    #     name: redhat.rhel_system_roles.tlog
+    #   vars:
+    #     tlog_scope_sssd: all
+    #     tlog_use_sssd: true
+    #     #tlog_groups_sssd: wheel
+    #     #tlog_users_sssd: root
