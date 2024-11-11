@@ -26,7 +26,7 @@
         name: sssd
         state: restarted
 
-    ####doesnt work right, clobbers sssd...
+    ### doesnt work right, clobbers sssd...
     # - name: Use system role to setup terminal logging for all users
     #   ansible.builtin.include_role:
     #     name: redhat.rhel_system_roles.tlog
