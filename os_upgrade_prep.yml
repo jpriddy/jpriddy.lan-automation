@@ -1,3 +1,4 @@
+---
 - name: Prepare system for upgrade and perform a dry run
   hosts: all
   become: true
