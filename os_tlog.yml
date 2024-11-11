@@ -10,6 +10,7 @@
         mode: '0600'
         dest: /etc/sssd/sssd.conf
 
+    # dnf module failing for some reason...
     - name: Install tlog and cockpit-session-recording
       ansible.builtin.shell: "dnf install -y cockpit-session-recording tlog"
 
