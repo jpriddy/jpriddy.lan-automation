@@ -1,0 +1,22 @@
+- name: Prepare system for upgrade and perform a dry run
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Package update
+      ansible.builtin.dnf:
+        name: "*"
+        state: latest
+        update_cache: true
+
+    - name: Install required packages for upgrade
+      ansible.builtin.dnf:
+        name:
+          - dnf-plugin-system-upgrade
+          - dnf-plugin-core
+        state: latest
+
+    - name: Dry run
+      ansible.builtin.command: dnf system-upgrade plan
+  #    register: upgrade_output
+  #    changed_when: upgrade_output.rc != 0
