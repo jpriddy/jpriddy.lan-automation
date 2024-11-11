@@ -52,7 +52,7 @@ fedora_clients:
     bas:
       ansible_host: "bas.jpriddy.lan"
     gar:
-      ansible_host: "bas.jpriddy.lan"
+      ansible_host: "gar.jpriddy.lan"
 
 mac_clients:
   hosts:

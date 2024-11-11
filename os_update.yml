@@ -7,6 +7,7 @@
       ansible.builtin.dnf: name='*' state=latest
       when:
         - ansible_os_family == "RedHat"
+
     # - name: Install system updates for debian based hosts (apt)
     #      ansible.builtin.apt:
     #     name: '*'
