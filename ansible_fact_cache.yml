@@ -1,3 +1,6 @@
 ---
-- name: Update facts cache
+- name: Update facts
   hosts: all
+  gather_facts: true
+
+
