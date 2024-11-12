@@ -13,17 +13,16 @@
       ansible.builtin.rpm_key:
         key: "https://repo.netdata.cloud/netdatabot.gpg.key"
         state: present
-      when: ansible_distribution == 'Fedora'
 
-    - name: Download netdata repo config rpm for Fedora 41 <-- fix me and move me to stable
+    - name: Download netdata repo config rpm for Fedora 41 
       ansible.builtin.get_url:
-        url: https://repo.netdata.cloud/repos/repoconfig/fedora/41/x86_64/netdata-repo-edge-4-1.noarch.rpm
-        dest: /tmp/netdata-repo-edge-4-1.noarch.rpm
+        url: https://repo.netdata.cloud/repos/repoconfig/fedora/41/x86_64/netdata-repo-4-1.noarch.rpm
+        dest: /tmp/netdata-repo-4-1.noarch.rpm
         mode: '0644'
 
-    - name: Install repo config rpm for edge <-- fix me and move me to stable 
+    - name: Install repo config rpm 
       ansible.builtin.dnf:
-        name: /tmp/netdata-repo-edge-4-1.noarch.rpm
+        name: /tmp/netdata-repo-4-1.noarch.rpm
         validate_certs: false
         state: present
 
