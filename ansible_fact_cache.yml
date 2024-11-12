@@ -2,5 +2,3 @@
 - name: Update facts
   hosts: all
   gather_facts: true
-
-
