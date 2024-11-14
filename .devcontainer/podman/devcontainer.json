@@ -11,7 +11,21 @@
   "updateRemoteUserUID": true,
   "customizations": {
     "vscode": {
-      "extensions": ["redhat.ansible"]
+      "extensions": [
+        "redhat.ansible",
+        "redhat.vscode-redhat-account",
+        "redhat.vscode-openshift-connector",
+        "redhat.java",
+        "redhat.vscode-yaml",
+        "redhat.vscode-xml",
+        "redhat.fabric8-analytics",
+        "redhat.vscode-commons",
+        "redhat.vscode-rsp-ui",
+        "redhat.vscode-server-connector",
+        "redhat.vscode-openshift-java-pack",
+        "redhat.vscode-openshift-extension-pack",
+        "redhat.vscode-tekton-pipelines"
+      ]
     }
   }
 }
