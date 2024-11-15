@@ -31,7 +31,10 @@
         "ms-vscode.remote-explorer",
         "ms-kubernetes-tools.vscode-kubernetes-tools",
         "ms-python.python",
-        "ms-python.debugpy"
+        "ms-python.debugpy",
+        "github.vscode-github-actions",
+        "ms-python.vscode-pylance",
+        "GitHub.vscode-pull-request-github"
       ]
     }
   }
