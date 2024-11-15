@@ -90,7 +90,7 @@ rhel_servers:
     aap:
       ansible_host: "aap.jpriddy.lan"
     
-windows_servers:
+windows:
   hosts:
     dc1:
       ansible_host: "dc1.jpriddy.lan"
