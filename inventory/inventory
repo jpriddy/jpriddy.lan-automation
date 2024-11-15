@@ -96,11 +96,7 @@ windows:
       ansible_host: "dc1.jpriddy.lan"
     dc2:
       ansible_host: "dc2.jpriddy.lan"
-
-windows_clients:
-  hosts:
     win11:
       ansible_host: "win11.jpriddy.lan"
     desktop:
       ansible_host: "desktop.jpriddy.lan"
-
