@@ -1,5 +1,5 @@
 ---
-- name: setup /etc/fstab for NFS shares from synology
+- name: Setup /etc/fstab for NFS shares from synology
   hosts: all
 
   vars:
@@ -14,14 +14,14 @@
       - { name: music, server_path: /volume2/music }
       - { name: document, server_path: /volume2/document }
       - { name: video, server_path: /volume2/video }
-  
+
   tasks:
 
     - name: Ensure nfs-utils is installed
       ansible.builtin.dnf:
         name: nfs-utils
         state: present
- 
+
     - name: Mount NFS shares
       ansible.posix.mount:
         src: "192.168.1.30:{{ item.server_path }}"

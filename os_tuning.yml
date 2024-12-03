@@ -22,4 +22,3 @@
         name: tuned
         enabled: true
         state: started
-
