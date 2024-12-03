@@ -1,7 +1,7 @@
 ---
-- name: Configure os tuning 
+- name: Configure os tuning
   hosts: all
-  
+
   tasks:
 
     - name: Install packages
@@ -14,6 +14,8 @@
     - name: Setup tuned for auto_profile
       ansible.builtin.command:
         cmd: "/usr/sbin/tuned-adm auto_profile"
+      register: output
+      changed_when: output.rc != 0
 
     - name: Enable and start tuned
       ansible.builtin.systemd:
@@ -21,3 +23,5 @@
         enabled: true
         state: started
 
+
+        
