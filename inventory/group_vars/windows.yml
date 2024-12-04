@@ -1,4 +1,4 @@
 ---
 ansible_connection: winrm
-ansible_shell_type:  cmd
+ansible_shell_type: cmd
 

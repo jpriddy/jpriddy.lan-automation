@@ -14,5 +14,3 @@ collections:
   - name: chocolatey.chocolatey
   - name: microsoft.ad
   - name: containers.podman
-
-    

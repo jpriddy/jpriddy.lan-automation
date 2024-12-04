@@ -2,10 +2,10 @@
 #
 [Unit]
 Description=Glances
-After=network.target
+After=syslog.target network.target auditd.service
 
 [Service]
-ExecStart=/usr/bin/glances -s
+ExecStart=/usr/bin/glances -w
 Restart=on-abort
 RemainAfterExit=yes
 
