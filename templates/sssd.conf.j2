@@ -3,10 +3,12 @@
 [sssd]
 services = nss, pam, ssh, sudo
 domains = nssfiles
+
 [domain/nssfiles]
 id_provider = proxy
 proxy_lib_name = files
 proxy_pam_target = sssd-shadowutils
+
 [ssh]
 
 [sudo]

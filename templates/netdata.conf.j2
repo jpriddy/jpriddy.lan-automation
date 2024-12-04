@@ -16,7 +16,7 @@
 	# host access prefix = /host
 	# glibc malloc arena max for plugins = 1
 	# glibc malloc arena max for netdata = 1
-	# hostname = b17913f8d0b3
+    hostname = {{ ansible_hostname }}
 	# history = 3996
 	# update every = 1
 	# config directory = /etc/netdata
@@ -29,7 +29,7 @@
 	# memory mode = save
 	# memory deduplication (ksm) = yes
 	# TZ environment variable = :/etc/localtime
-	# timezone = Etc/UTC
+    timezone = Americas/New_York
 	# debug flags = 0x0000000000000000
 	# debug log = /var/log/netdata/debug.log
 	# error log = /var/log/netdata/error.log
@@ -46,7 +46,7 @@
 	# delete orphan hosts files = yes
 
 [web]
-	# default port = 19999
+    default port = 19999
 	# mode = static-threaded
 	# listen backlog = 4096
 	# bind to = *
@@ -93,6 +93,8 @@
 	# rotate log every lines = 2000
 
 [registry]
+    registry to announce = https://homeassistant.jpriddy.lan:19999
+    registry hostname = {{ ansible_hostname }}
 	# enabled = no
 	# registry db directory = /var/lib/netdata/registry
 	# netdata unique id file = /var/lib/netdata/registry/netdata.public.unique.id
