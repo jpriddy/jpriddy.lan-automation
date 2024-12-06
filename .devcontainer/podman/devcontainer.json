@@ -7,6 +7,7 @@
     "--device",
     "/dev/fuse",
     "--hostname=ansible-dev-container"
+    "--security-opt label=disable"
   ],
   "updateRemoteUserUID": true,
   "customizations": {
