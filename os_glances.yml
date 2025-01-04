@@ -6,7 +6,7 @@
 
     - name: Install glances
       ansible.builtin.dnf:
-        name: glances
+        name: glances python3-jinja2.noarch
         state: present
 
     - name: Replacing systemd service file
