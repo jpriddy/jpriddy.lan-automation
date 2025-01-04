@@ -11,7 +11,7 @@
           - python3-jinja2.noarch
         state: present
 
-    - name: Replace systemd service file at /usr/lib/systemd/system/glances.service
+    - name: Replace service file at /usr/lib/systemd/system/glances.service
       ansible.builtin.template:
         src: templates/glances.service.j2
         mode: '0644'
