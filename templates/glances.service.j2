@@ -5,7 +5,7 @@ Description=Glances
 After=syslog.target network.target auditd.service
 
 [Service]
-ExecStart=/usr/bin/glances -w
+ExecStart=glances -w -s
 Restart=on-abort
 RemainAfterExit=yes
 
