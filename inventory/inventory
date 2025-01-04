@@ -53,8 +53,6 @@ fedora_clients:
       ansible_host: "bas.jpriddy.lan"
     gar:
       ansible_host: "gar.jpriddy.lan"
-    kit:
-      ansible_host: "kit.jpriddy.lan"
     db:
       ansible_host: "db.jpriddy.lan"
 
