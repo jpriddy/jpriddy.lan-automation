@@ -13,5 +13,5 @@
       System type  : {{ ansible_system }}
       Virt type    : {{ ansible_virtualization_type }} {{ ansible_virtualization_role }}
       IP address   : {{ ansible_default_ipv4.address }}
-      MOTD Updated : {{ ansible_date_time }} {{ ansible_user }}
+      MOTD Updated : {{ ansible_date_time }} by ansible user {{ ansible_user }}
  --------------------------------------------------------------
