@@ -10,5 +10,5 @@
       IP address   : {{ ansible_default_ipv4.address }}
       System type  : {{ ansible_system }}
       Virt type    : {{ ansible_virtualization_type }} {{ansible_virtualization_role}}
-      MOTD Updated : %m-%d-%Y by {uid} from {host}
+      MOTD Updated : {%m-%d-%Y by {uid} from {host}}
  --------------------------------------------------------------
