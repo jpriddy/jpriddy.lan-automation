@@ -6,9 +6,9 @@
   __ / / .___/_/  /_/\__,_/\__,_/\__, /  (_)  /_/\__,_/_/ /_/ 
  /___/_/                       /____/                        
  
-       OS          : {{ ansible_distribution }} {{ ansible_distribution_version }}
-       IP address  : {{ ansible_default_ipv4.address }}
-       System type : {{ ansible_system }}
-       Virt type   : {{ ansible_virtualization_type }} {{ansible_virtualization_role}}
-       Deployed    : %Y-%m-%d %H:%M:%S by {uid} from {host}
+      OS           : {{ ansible_distribution }} {{ ansible_distribution_version }}
+      IP address   : {{ ansible_default_ipv4.address }}
+      System type  : {{ ansible_system }}
+      Virt type    : {{ ansible_virtualization_type }} {{ansible_virtualization_role}}
+      MOTD Updated : %Y-%m-%d by {uid} from {host}
  --------------------------------------------------------------
