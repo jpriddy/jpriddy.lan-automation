@@ -6,9 +6,12 @@
   __ / / .___/_/  /_/\__,_/\__,_/\__, /  (_)  /_/\__,_/_/ /_/ 
  /___/_/                       /____/                        
  
-      OS           : {{ ansible_distribution }} {{ ansible_distribution_version }}
-      IP address   : {{ ansible_default_ipv4.address }}
+      FQDN:        : {{ ansible_facts.fqdn }}
+      CPUs:        : {{ ansible_facts.processor_vcpus }}
+      RAM:         : {{ (ansible_facts.memtotal_mb / 1000) | round(1) }}GB
+      OS           : {{ ansible_distribution }} {{ ansible_distribution_version }} {{ ansible_facts.distribution_release }}
       System type  : {{ ansible_system }}
       Virt type    : {{ ansible_virtualization_type }} {{ ansible_virtualization_role }}
+      IP address   : {{ ansible_default_ipv4.address }}
       MOTD Updated : %m-%d-%Y by {{ uid }} from {{ host }}}
  --------------------------------------------------------------
