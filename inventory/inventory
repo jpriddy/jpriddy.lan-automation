@@ -4,7 +4,7 @@ local:
     localhost:
       ansible_host: "127.0.0.1"
       
-appliances:
+appliance:
   hosts:
     synology:
       ansible_host: "192.168.1.30"
@@ -13,7 +13,7 @@ appliances:
       vars:
         opnsense_base_url: "http://192.168.1.1"
 
-network_mikrotik:
+mikrotik:
   hosts:
     bassw00:
       ansible_host: "bassw00.jpriddy.lan"
@@ -31,12 +31,8 @@ network_mikrotik:
       ansible_host: "offsw02.jpriddy.lan"
     batsw00:
       ansible_host: "batsw00.jpriddy.lan"
-  vars:
-    ansible_connection: "ansible.netcommon.network_cli"
-    ansible_network_os: "community.routeros.routeros"
-    ansible_user: "admin"
 
-network_ruckus:
+ruckus:
   hosts:
     ap01:
       ansible_host: "ap01.jpriddy.lan"
@@ -61,16 +57,12 @@ mac_clients:
     mac:
       ansible_host: "mac.jpriddy.lan"
       
-kickstart_servers:
+kickstart:
   hosts:
     fedora:
       ansible_host: "fedora.jpriddy.lan"
-      ansible_user: "root"
-      ansible_ssh_pass: "fedora"  #matches kickstart
     rhel:
       ansible_host: "rhel.jpriddy.lan"
-      ansible_user: "root"
-      ansible_ssh_pass: "rhel"  #matches kickstart
       
 fedora_servers:
   hosts:
@@ -81,7 +73,7 @@ fedora_servers:
     db:
       ansible_host: "db.jpriddy.lan"
 
-virt_servers:
+virt:
   hosts:
     virt1:
       ansible_host: "virt1.jpriddy.lan"
