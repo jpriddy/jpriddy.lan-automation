@@ -3,7 +3,6 @@
   hosts: all
 
   tasks:
-  
     - name: Use system role to configure journald to take up max 256mb
       ansible.builtin.include_role:
         name: redhat.rhel_system_roles.journald
