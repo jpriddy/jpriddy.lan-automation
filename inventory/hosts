@@ -2,13 +2,14 @@ local:
   hosts:
     localhost:
       ansible_host: "127.0.0.1"
-      
+
 appliance:
   hosts:
     synology:
       ansible_host: "synology.jpriddy.lan"
     firewall:
       ansible_host: "firewall.jpriddy.lan"
+
 mikrotik:
   hosts:
     bassw00:
@@ -52,14 +53,14 @@ mac_clients:
   hosts:
     mac:
       ansible_host: "mac.jpriddy.lan"
-      
+
 kickstart:
   hosts:
     fedora:
       ansible_host: "fedora.jpriddy.lan"
     rhel:
       ansible_host: "rhel.jpriddy.lan"
-      
+
 fedora_servers:
   hosts:
     media:
@@ -74,14 +75,13 @@ virt:
     virt1:
       ansible_host: "virt1.jpriddy.lan"
 
-
 rhel_servers:
-  hosts:    
+  hosts:
     sat:
-      ansible_host: "sat.jpriddy.lan" 
+      ansible_host: "sat.jpriddy.lan"
     aap:
       ansible_host: "aap.jpriddy.lan"
-    
+
 windows:
   hosts:
     dc1:
