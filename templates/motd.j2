@@ -1,5 +1,4 @@
-
- --------------------------------------------------------------
++-----------------------------+-------------------------------+
          _            _     __    __              __          
         (_)___  _____(_)___/ /___/ /_  __        / /___ _____ 
        / / __ \/ ___/ / __  / __  / / / /       / / __ `/ __ \
@@ -7,13 +6,11 @@
   __ / / .___/_/  /_/\__,_/\__,_/\__, /  (_)  /_/\__,_/_/ /_/ 
  /___/_/                       /____/                        
  
-      FQDN:        : {{ ansible_facts.fqdn }}
-      CPUs:        : {{ ansible_facts.processor_vcpus }}
-      RAM:         : {{ (ansible_facts.memtotal_mb / 1000) | round(1) }}GB
-      OS           : {{ ansible_distribution }} {{ ansible_distribution_version }} {{ ansible_facts.distribution_release }}
-      System type  : {{ ansible_system }}
-      Virt type    : {{ ansible_virtualization_type }} {{ ansible_virtualization_role }}
-      IP address   : {{ ansible_default_ipv4.address }}
-      MOTD Updated : {{ ansible_date_time.date }}
- --------------------------------------------------------------
+       OS          : {{ ansible_distribution }} {{ ansible_distribution_version }}
+       IP address  : {{ ansible_default_ipv4.address }}
+       System type : {{ ansible_system }}
+       Virt type   : {{ ansible_virtualization_type }} {{ansible_virtualization_role}}
+       Last updated: {{ ansible_managed }}
+ +-----------------------------+-------------------------------+
 
+ 
