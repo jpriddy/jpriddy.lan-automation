@@ -7,12 +7,9 @@ local:
 appliance:
   hosts:
     synology:
-      ansible_host: "192.168.1.30"
+      ansible_host: "synology.jpriddy.lan"
     firewall:
-      ansible_host: "192.168.1.1"
-      vars:
-        opnsense_base_url: "http://192.168.1.1"
-
+      ansible_host: "firewall.jpriddy.lan"
 mikrotik:
   hosts:
     bassw00:
