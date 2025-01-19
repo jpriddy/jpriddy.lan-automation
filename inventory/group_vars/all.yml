@@ -1,3 +1,2 @@
 ---
-host_key_checking: False #so the hosts/ips can be reused
-
+host_key_checking: false #so the hosts/ips can be reused

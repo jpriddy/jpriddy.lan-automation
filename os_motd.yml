@@ -1,11 +1,10 @@
 ---
 - name: Configure motd
   hosts: all
-  
-  tasks:
 
-  - name: Replacing /etc/motd with MOTD template
-    ansible.builtin.template:
-      src: templates/motd.j2
-      mode: '0644'
-      dest: /etc/motd
+  tasks:
+    - name: Replacing /etc/motd with MOTD template
+      ansible.builtin.template:
+        src: templates/motd.j2
+        mode: "0644"
+        dest: /etc/motd
