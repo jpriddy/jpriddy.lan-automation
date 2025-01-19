@@ -53,8 +53,6 @@ fedora_clients:
       ansible_host: "bas.jpriddy.lan"
     gar:
       ansible_host: "gar.jpriddy.lan"
-    off:
-      ansible_host: "off.jpriddy.lan"
 
 mac_clients:
   hosts:
@@ -78,8 +76,6 @@ fedora_servers:
       ansible_host: "media.jpriddy.lan"
     containers:
       ansible_host: "containers.jpriddy.lan"
-    db:
-      ansible_host: "db.jpriddy.lan"
 
 virt_servers:
   hosts:
