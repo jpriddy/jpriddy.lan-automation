@@ -1,3 +1,6 @@
+db.jpriddy.lan
+virt1.jpriddy.lan
+
 [appliances]
 synology.jpriddy.lan
 firewall.jpriddy.lan
@@ -33,12 +36,6 @@ rhel.jpriddy.lan
 [fedora_servers]
 media.jpriddy.lan
 containers.jpriddy.lan
-
-[dbs]
-db.jpriddy.lan
-
-[virt]
-virt1.jpriddy.lan
 
 [rhel_servers]
 sat.jpriddy.lan
