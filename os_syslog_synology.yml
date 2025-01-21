@@ -1,5 +1,6 @@
 ---
-- hosts: all 
+- name: Modify syslog for synology
+  hosts: all 
   tasks:
 
     - name: Create rsyslog configuration file

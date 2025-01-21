@@ -1,10 +1,11 @@
 ---
-- hosts: all 
+- name: Modify syslog for graylog
+  hosts: all 
   tasks:
 
     - name: Create rsyslog configuration file
       template:
-        src: 99-greylog.conf.j2 
+        src: 99-graylog.conf.j2 
         dest: /etc/rsyslog.d/99-graylog.conf
       notify: restart rsyslog
 
