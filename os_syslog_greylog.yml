@@ -1,6 +1,5 @@
 ---
 - hosts: all 
-  become: true
   tasks:
 
     - name: Create rsyslog configuration file
