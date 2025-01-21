@@ -1,0 +1,24 @@
+---
+- hosts: all 
+  become: true
+  tasks:
+
+    - name: Create rsyslog configuration file
+      template:
+        src: 99-greylog.conf.j2 
+        dest: /etc/rsyslog.d/99-graylog.conf
+      notify: restart rsyslog
+
+    - name: Restart rsyslog service
+      service:
+        name: rsyslog
+        state: restarted
+
+  vars:
+    graylog_server: db.jpriddy.lan 
+    graylog_port: 514 
+
+  templates:
+    - source: rsyslog.conf.j2
+      content: |
+        *.* @@{{ graylog_server }}:{{ graylog_port }}
