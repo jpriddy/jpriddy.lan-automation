@@ -3,7 +3,6 @@
   hosts: all
 
   tasks:
-
     - name: Use system role to set up cockpit
       ansible.builtin.include_role:
         name: redhat.rhel_system_roles.cockpit
@@ -23,11 +22,11 @@
           - cockpit-files
         cockpit_config:
           WebService:
-            LoginTitle: "Cockpit Web Management - welcome to jpriddy.lan"
+            LoginTitle: Cockpit Web Management - welcome to jpriddy.lan
             MaxStartups: 20
           Session:
             IdleTimeout: 0
-          #  Banner: /etc/motd # see here: https://cockpit-project.org/faq.html#error-message-about-being-offline
+        #  Banner: /etc/motd # see here: https://cockpit-project.org/faq.html#error-message-about-being-offline
         cockpit_enabled: true
         cockpit_port: 9090 # need an offramp for systems that already have something running on 9090 (satellite...)
 
