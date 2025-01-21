@@ -5,7 +5,7 @@
 
     - name: Create rsyslog configuration file
       template:
-        src: 99-synology.conf.j2 
+        src: templates/99-synology.conf.j2 
         dest: /etc/rsyslog.d/99-synology.conf
       notify: restart rsyslog
 
@@ -17,8 +17,3 @@
   vars:
     synology_server: synology.jpriddy.lan 
     synology_port: 514 
-
-  templates:
-    - source: rsyslog.conf.j2
-      content: |
-        *.* @@{{ synology_server }}:{{ synology_port }}
