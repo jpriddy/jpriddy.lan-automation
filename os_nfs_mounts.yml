@@ -16,7 +16,6 @@
       - { name: video, server_path: /volume2/video }
 
   tasks:
-
     - name: Ensure nfs-utils is installed
       ansible.builtin.dnf:
         name: nfs-utils
@@ -24,9 +23,9 @@
 
     - name: Mount NFS shares
       ansible.posix.mount:
-        src: "192.168.1.30:{{ item.server_path }}"
-        path: "/synology/{{ item.name }}"
+        src: 192.168.1.30:{{ item.server_path }}
+        path: /synology/{{ item.name }}
         fstype: nfs
-        opts: "rw,relatime,vers=3,rsize=131072,wsize=131072,namlen=255,hard,timeo=600,retrans=2,sec=sys,local_lock=none,_netdev"
+        opts: rw,relatime,vers=3,rsize=131072,wsize=131072,namlen=255,hard,timeo=600,retrans=2,sec=sys,local_lock=none,_netdev
         state: mounted
       with_items: "{{ nfs_mounts }}"
