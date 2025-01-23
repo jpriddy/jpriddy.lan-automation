@@ -7,7 +7,6 @@
       template:
         src: templates/99-synology.conf.j2 
         dest: /etc/rsyslog.d/99-synology.conf
-      notify: restart rsyslog
 
     - name: Restart rsyslog service
       service:
