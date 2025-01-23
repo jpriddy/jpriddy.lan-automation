@@ -3,16 +3,15 @@
   hosts: all
 
   tasks:
-
     - name: Set system hostname to ansible inventory hostname
       ansible.builtin.hostname:
-        name: '{{ inventory_hostname }}.jpriddy.lan'
+        name: "{{ inventory_hostname }}.jpriddy.lan"
         use: systemd
 
     - name: Configure /etc/hostname since the hostname module can't?
       ansible.builtin.copy:
-        content: {{ inventory_hostname }}
+        content: { { inventory_hostname: !!null "" }: !!null "" }
         dest: /etc/hostname
         owner: root
         group: root
-        mode: '0644'
+        mode: "0644"

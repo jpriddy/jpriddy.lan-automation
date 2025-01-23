@@ -7,4 +7,4 @@ ansible-navigator:
 
   playbook-artifact:
     enable: true
-    save-as: "$PWD/.logs/{playbook_name}-artifact-{time_stamp}.json"
+    save-as: $PWD/.logs/{playbook_name}-artifact-{time_stamp}.json
