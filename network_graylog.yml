@@ -1,0 +1,11 @@
+---
+- name: Configure MikroTik to send logs of warning and above to remote Syslog server
+  hosts: all
+  tasks:
+
+   - name: "Configure remote syslog server for warning and above logs"
+     community.routeros.command:
+       commands:
+         - /system logging action add name=syslog_remote target=remote remote=192.168.1.157 syslog-facility=local0
+         - /system logging add topics=all action=syslog_remote severity=warning
+     when: ansible_network_os == "community.routeros.routeros"
