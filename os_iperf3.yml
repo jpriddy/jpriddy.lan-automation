@@ -3,7 +3,6 @@
   hosts: all
 
   tasks:
-
     - name: Install iperf3
       ansible.builtin.dnf:
         name: iperf3
@@ -12,7 +11,7 @@
     - name: Create systemd service file
       ansible.builtin.template:
         src: templates/iperf3.service.j2
-        mode: '0644'
+        mode: "0644"
         dest: /usr/lib/systemd/system/iperf3.service
 
     - name: Pick up new iperf3 service with systemd and then enable/start
