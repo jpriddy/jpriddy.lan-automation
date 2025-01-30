@@ -1,4 +1,4 @@
-# jpriddy.lan-automationd Ansible Project
+# jpriddy.lan-automation Ansible Project
 
 ## Sample
 
