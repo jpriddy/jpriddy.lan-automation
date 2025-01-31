@@ -3,10 +3,9 @@
   hosts: all
 
   tasks:
-    
     - name: Remove default rule for wheel group
       community.general.sudoers:
-        commands: '%wheel ALL=(ALL) ALL !requiretty'
+        commands: "%wheel ALL=(ALL) ALL !requiretty"
         group: wheel
         name: wheel-with-password
         state: absent
@@ -18,4 +17,3 @@
         commands: ALL
         nopassword: true
         state: present
- 

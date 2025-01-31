@@ -1,11 +1,10 @@
 ---
 - name: Modify syslog for synology
-  hosts: all 
+  hosts: all
   tasks:
-
     - name: Create rsyslog configuration file
-      template:
-        src: templates/99-synology.conf.j2 
+      ansible.builtin.template:
+        src: templates/99-synology.conf.j2
         dest: /etc/rsyslog.d/99-synology.conf
 
     - name: Restart rsyslog service
@@ -14,5 +13,5 @@
         state: restarted
 
   vars:
-    synology_server: synology.jpriddy.lan 
-    synology_port: 514 
+    synology_server: synology.jpriddy.lan
+    synology_port: 514
