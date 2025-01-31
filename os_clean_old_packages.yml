@@ -51,9 +51,8 @@
           - "Clean GPG keys: {{ clean_gpg_result.stdout }}"
           - "Distro sync: {{ distro_sync_result.stdout }}"
           - "Fixfiles: {{ fixfiles_result.stdout }}"
-    
+
     - name: clean up any leftover dnf cache
       ansible.builtin.command: rm -rf /var/cache/dnf
       register: cleancache_result
       changed_when: cleancache_result.rc == 0
-
