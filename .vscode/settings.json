@@ -1,5 +1,5 @@
 {
-    "ansible.python.interpreterPath": "/opt/homebrew/bin/python3",
+    "ansible.python.interpreterPath": "/usr/local/bin/python3",
     "yaml.schemas": {
         "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/playbook": "file:///Users/jpriddy/git/jpriddy.lan-automation/network_add_homepage.yml",
         "https://raw.githubusercontent.com/devfile/api/v2.2.0/schemas/latest/devfile.json": "vscode-vfs://github/jpriddy/jpriddy.lan-automation/devfile.yaml"
