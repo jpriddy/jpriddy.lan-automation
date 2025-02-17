@@ -11,7 +11,7 @@
 
     - name: Configure /etc/hostname since the hostname module can't?
       ansible.builtin.copy:
-        content: {{ inventory_hostname }}
+        content: '{{ inventory_hostname }}'
         dest: /etc/hostname
         owner: root
         group: root
