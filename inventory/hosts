@@ -1,48 +1,48 @@
-db.jpriddy.lan
-virt1.jpriddy.lan
+db
+virt1
 
 [appliances]
-synology.jpriddy.lan
-firewall.jpriddy.lan
+synology
+firewall
 
 [mikrotik]
-bassw00.jpriddy.lan
-bassw01.jpriddy.lan
-bassw02.jpriddy.lan
-garsw00.jpriddy.lan
-garsw01.jpriddy.lan
-offsw00.jpriddy.lan
-offsw02.jpriddy.lan
-batsw00.jpriddy.lan
+bassw00
+bassw01
+bassw02
+garsw00
+garsw01
+offsw00
+offsw02
+batsw00
 
 [ruckus]
-ap01.jpriddy.lan
-ap02.jpriddy.lan
-ap03.jpriddy.lan
+ap01
+ap02
+ap03
 
 [fedora_clients]
-xps.jpriddy.lan
-bas.jpriddy.lan
-gar.jpriddy.lan
-off.jpriddy.lan
+xps
+bas
+gar
+off
 
 [mac_clients]
-mac.jpriddy.lan
+mac
 
 [kickstarts]
 fedora
 rhel
 
 [fedora_servers]
-media.jpriddy.lan
-containers.jpriddy.lan
+media
+containers
 
 [rhel_servers]
-sat.jpriddy.lan
-aap.jpriddy.lan
+sat
+aap
 
 [windows]
-dc1.jpriddy.lan
-dc2.jpriddy.lan
-win11.jpriddy.lan
-desktop.jpriddy.lan
+dc1
+dc2
+win11
+desktop
