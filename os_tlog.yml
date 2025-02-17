@@ -3,7 +3,6 @@
   hosts: all
 
   tasks:
-
     - name: Install packages from the base repos
       ansible.builtin.dnf:
         name: "{{ item }}"
@@ -12,20 +11,20 @@
         - cockpit-session-recording
         - tlog
 
-  # alternative
-  #  - name: Install tlog and cockpit-session-recording
-  #    ansible.builtin.shell: "dnf install -y cockpit-session-recording tlog"
+    # alternative
+    #  - name: Install tlog and cockpit-session-recording
+    #    ansible.builtin.shell: "dnf install -y cockpit-session-recording tlog"
 
     - name: Create/replace sssd.conf
       ansible.builtin.template:
         src: templates/sssd.conf.j2
-        mode: '0600'
+        mode: "0600"
         dest: /etc/sssd/sssd.conf
 
     - name: Setup sssd-session-recording.conf in drop dir
       ansible.builtin.template:
         src: templates/sssd-session-recording.conf.j2
-        mode: '0600'
+        mode: "0600"
         dest: /etc/sssd/conf.d/sssd-session-recording.conf
 
     - name: Restart sssd to pickup new configs
