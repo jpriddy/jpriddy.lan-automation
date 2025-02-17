@@ -30,8 +30,8 @@ off.jpriddy.lan
 mac.jpriddy.lan
 
 [kickstarts]
-fedora.jpriddy.lan
-rhel.jpriddy.lan
+fedora
+rhel
 
 [fedora_servers]
 media.jpriddy.lan
