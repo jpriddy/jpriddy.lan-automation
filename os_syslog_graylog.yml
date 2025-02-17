@@ -3,6 +3,11 @@
   hosts: all 
   tasks:
 
+    - name: Ensure rsysliog is installed
+      ansible.builtin.dnf:
+        name: rsyslog
+        state: present
+
     - name: Create rsyslog configuration file
       template:
         src: templates/99-graylog.conf.j2 
