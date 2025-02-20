@@ -5,7 +5,7 @@
 
    - name: "Configure to send to remote syslog (graylog)"
      community.routeros.command:
-       commands:
-         - /system logging action add name=syslog_remote target=remote remote=192.168.1.157 syslog-facility=local0
-         - /system logging add topics=all action=syslog_remote severity=warning
+      commands:
+      - /system logging action add name=syslog_remote target=remote remote=192.168.1.157 syslog-facility=local0
+      - /system logging add topics=all action=syslog_remote severity=warning
      when: ansible_network_os == "community.routeros.routeros"

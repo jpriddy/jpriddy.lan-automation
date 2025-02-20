@@ -5,6 +5,6 @@
 
    - name: "Add user using routeros command"
      community.routeros.command:
-         commands: 
-         - /user add name=homepage group=read password="{{ homepage_password }}" ## custom cred in ctlr
+      commands: 
+      - /user add name=homepage group=read password="{{ homepage_password }}" ## custom cred in ctlr
      when: ansible_network_os == "community.routeros.routeros"
