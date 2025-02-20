@@ -15,8 +15,10 @@
       state: reloaded
       enabled: true
 
-   #- name: Create automounter configuration file
+   # - name: Create automounter configuration file
    #  template:
    #     src: templates/automounter.conf.j2
    #     dest: /etc/auto.master.d/auto.ansible
-   #     mode: '0644'
+   #     owner: root
+   #     group: root
+   #     mode: '0644'  
