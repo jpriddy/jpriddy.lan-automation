@@ -3,7 +3,6 @@
   hosts: all
 
   tasks:
-
     - name: Install packages
       ansible.builtin.dnf:
         name: "{{ item }}"
@@ -13,7 +12,7 @@
 
     - name: Setup tuned for auto_profile
       ansible.builtin.command:
-        cmd: "/usr/sbin/tuned-adm auto_profile"
+        cmd: /usr/sbin/tuned-adm auto_profile
       register: output
       changed_when: output.rc != 0
 

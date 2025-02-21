@@ -2,9 +2,8 @@
 - name: Setup flathub/pack
   hosts: all
   become: true
-  
-  tasks:
 
+  tasks:
     - name: Ensure flatpak is installed
       ansible.builtin.dnf:
         name: flatpak
