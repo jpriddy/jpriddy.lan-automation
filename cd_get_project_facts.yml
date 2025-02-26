@@ -1,0 +1,28 @@
+---
+- name: "Derive project name for env"
+  ansible.builtin.set_fact:
+    project_name: "{{ proj_name | regex_replace('^.*?_', item.env + '_') }}"
+
+- name: "Check if project {{ project_name }} exists"
+  register: proj_temp_store
+  ansible.builtin.uri:
+    url: "https://{{ item.url }}/api/v2/projects/?name={{ project_name }}"
+    headers:
+      Authorization: "Bearer {{ item.token }}"
+    method: GET
+    validate_certs: no
+    return_content: yes
+
+- name: "Get check commit hash for {{ project_name }}"
+  register: hash_temp_store
+  ansible.builtin.uri:
+    url: "https://{{ item.url }}/api/v2/project_updates/?scm_revision={{ scm_deploy_hash }}&name={{ project_name }}&status=successful"
+    headers:
+      Authorization: "Bearer {{ item.token }}"
+    method: GET
+    validate_certs: no
+    return_content: yes
+
+- name: Append facts to project info
+  ansible.builtin.set_fact:
+    project_info: "{{ project_info  | default([]) + [ item | combine ({ 'commit_exists': True if hash_temp_store['json']['count'] != 0 else False, 'project_exists': True if proj_temp_store['json']['count'] != 0 else False, 'project_name': project_name }) ] }}"
