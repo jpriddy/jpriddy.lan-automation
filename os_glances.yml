@@ -1,21 +1,23 @@
 ---
-- name: Configure monitoring and metrics gathering
+- name: Configure glances system monitoring
   hosts: all
   
   tasks:
 
-    - name: Install glances
+    - name: Install glances and prereqs with dnf
       ansible.builtin.dnf:
-        name: glances
+        name: 
+          - glances
+          - python3-jinja2.noarch
         state: present
 
-    - name: Replacing systemd service file
+    - name: Replace service file at /usr/lib/systemd/system/glances.service
       ansible.builtin.template:
         src: templates/glances.service.j2
         mode: '0644'
         dest: /usr/lib/systemd/system/glances.service
 
-    - name: Reload glances
+    - name: Reload systemd daemon and restart glances
       ansible.builtin.systemd:
         name: glances
         daemon_reload: true

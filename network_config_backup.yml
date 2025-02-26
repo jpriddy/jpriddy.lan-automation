@@ -5,18 +5,18 @@
 
    - name: "Backup routeros system to *.backup"
      community.routeros.command:
-         commands: 
-         - /system backup save name={{inventory_hostname}}-{{ansible_date_time.date}}.backup
+      commands:
+      - /system backup save name={{inventory_hostname}}-{{ansible_date_time.date}}.backup
      when: ansible_network_os == "community.routeros.routeros"
 
 
    - name: "Export config to *.config_export.rsc"
      community.routeros.command:
-         commands: 
-         - /export show-sensitive file={{inventory_hostname}}-{{ansible_date_time.date}}.config_export.rsc
+      commands:
+      - /export show-sensitive file={{inventory_hostname}}-{{ansible_date_time.date}}.config_export.rsc
      when: ansible_network_os == "community.routeros.routeros"
 
-#getting timeout errors, perhaps its a permissions issue with the automount?
+# getting timeout errors, perhaps its a permissions issue with the automount?
 #  - name: "Grabbing backup file and storing in backup folder(s) on synology"
 #    ansible.netcommon.net_get:
 #        src: "{{inventory_hostname}}-{{ansible_date_time.date}}.backup"

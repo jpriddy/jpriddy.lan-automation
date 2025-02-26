@@ -3,7 +3,7 @@
   hosts: all
 
   tasks:
-    - name: Create account from custom credentials, set password, and add to groups wheel and users
+    - name: Create and configure account from existing user account
       ansible.builtin.user:
         name: "{{ user_account_username }}"
         append: true
@@ -12,3 +12,18 @@
         groups:
           - users
           - wheel
+    
+    ##example
+    # create a user called sample-user, set the password to 'testing', and add to groups wheel and users, and creats an ssh key 
+    - name: Create a user called sample-user, set the password to 'testing', and add
+        to groups wheel and users, and creats an ssh key
+      ansible.builtin.user:
+        name: sample-user,
+        password: "{{ _password_ }}"
+        groups:
+          - users
+          - wheel
+        generate_ssh_key: true
+        ssh_key_bits: 2048
+        ssh_key_file: .ssh/id_rsa
+
