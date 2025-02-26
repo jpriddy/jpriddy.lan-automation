@@ -1,5 +1,5 @@
 {
-    "ansible.python.interpreterPath": "/usr/bin/python3",
+    "ansible.python.interpreterPath": "c:\\Users\\jpriddy\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
     "yaml.schemas": {
         "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/playbook": "file:///Users/jpriddy/git/jpriddy.lan-automation/network_add_homepage.yml"
     }
