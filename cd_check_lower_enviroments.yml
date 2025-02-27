@@ -1,43 +1,45 @@
 ---
 - name: Evaluate if {{ proj_name }} has been released to lower enviroments
   hosts: localhost
-  gather_facts: False
+  gather_facts: false
 
   vars:
-    AAP_Controller_URL: "https://{{ aap_api_url }}"
+    AAP_Controller_URL: https://{{ aap_api_url }}
 
   tasks:
     # Get commit that is being deployed
     - name: Get scm url
       register: scm_get
       ansible.builtin.uri:
-        url: "https://{{ aap_api_url }}/api/v2/projects/?name={{ proj_name }}"
+        url: https://{{ aap_api_url }}/api/v2/projects/?name={{ proj_name }}
         headers:
-          Authorization: "Bearer {{ controller_oauthtoken }}"
+          Authorization: Bearer {{ controller_oauthtoken }}
         method: GET
-        validate_certs: no
-        return_content: yes
+        validate_certs: false
+        return_content: true
 
     - name: Project's SCM
-      set_fact:
-        project_scm_path: "{{ scm_get['json']['results'][0]['scm_url'] | regex_replace('^(?P<protocal>.*)@code.dtcc.com(?P<port>.*?)(?P<path>\\/.*)', '\\g<path>') }}"
+      ansible.builtin.set_fact:
+        project_scm_path: "{{ scm_get['json']['results'][0]['scm_url'] | regex_replace('^(?P<protocal>.*)@code.dtcc.com(?P<port>.*?)(?P<path>\\/.*)', '\\g<path>')
+          }}"
 
     - name: Execute the command in remote shell; stdout goes to the specified file on the remote
       register: git_ls_remote
-      ansible.builtin.shell: "git -c http.sslVerify=false ls-remote https://{{ lookup('ansible.builtin.env', 'ANSIBLE_NET_USERNAME') }}:{{ lookup('ansible.builtin.env', 'ANSIBLE_NET_PASSWORD') }}@code.dtcc.com/scm{{ project_scm_path }} | grep {{ proj_branch_release }} "
-      # no_log: true
+      ansible.builtin.shell: "git -c http.sslVerify=false ls-remote https://{{ lookup('ansible.builtin.env', 'ANSIBLE_NET_USERNAME') }}:{{ lookup('ansible.builtin.env',
+        'ANSIBLE_NET_PASSWORD') }}@code.dtcc.com/scm{{ project_scm_path }} | grep {{ proj_branch_release }} "
+    # no_log: true
 
     - name: Get commit that is being deployed
-      set_fact: 
+      ansible.builtin.set_fact:
         scm_deploy_hash: "{{ git_ls_remote.stdout | regex_replace('^(?P<hash>.*)\\t(?P<branch>.*)', '\\g<hash>') }}"
-      
+
     - ansible.builtin.debug:
-        msg: "{{ scm_deploy_hash }}"        
+        msg: "{{ scm_deploy_hash }}"
 
     # Check if enviroments exist for this project
     - name: Lookup variable values
-      include_tasks: cd_get_project_facts.yml
       with_list: "{{ aap_env_info | from_json }}"
+      ansible.builtin.include_tasks: cd_get_project_facts.yml
 
     - ansible.builtin.debug:
         msg: "{{ project_info }}"
@@ -55,13 +57,13 @@
 
     # Checks for feature project
     - name: set feature project default
-      set_fact: 
-        feature_project: False
+      ansible.builtin.set_fact:
+        feature_project: false
 
-    - name: if feature project, release is allowed    # For testing, feature represents prod
+    - name: if feature project, release is allowed # For testing, feature represents prod
       when: proj_name is match("feature_*")
-      set_fact: 
-        feature_project: True
+      ansible.builtin.set_fact:
+        feature_project: true
 
     - name: Check feature_project flag
       when: feature_project
@@ -69,65 +71,65 @@
 
     # checks for ritlab project
     - name: set ritlab project default
-      set_fact: 
-        ritlab_project: False
+      set_fact:
+        ritlab_project: false
 
     - name: if ritlab project, release is allowed
       when: proj_name is match("ritlab_*")
-      set_fact: 
-        ritlab_project: True
-    
+      set_fact:
+        ritlab_project: true
+
     - name: Check feature_project flag
       when: ritlab_project
       ansible.builtin.meta: end_play
 
     # checks for dev project
     - name: set dev project default
-      set_fact: 
-        dev_project: False
+      ansible.builtin.set_fact:
+        dev_project: false
 
     - name: if dev project, release is allowed
       when: proj_name is match("dev_*")
-      set_fact: 
-        dev_project: True
-        
+      ansible.builtin.set_fact:
+        dev_project: true
+
     - name: Check dev_project flag
       when: dev_project
       ansible.builtin.meta: end_play
 
     # Checks for nonprod project
     - name: set nonprod project default
-      set_fact: 
-        nonprod_project: False
+      ansible.builtin.set_fact:
+        nonprod_project: false
 
     - name: if nonprod project, release is allowed
       when: proj_name is match("nonprod_*")
-      set_fact: 
-        nonprod_project: True
-        
+      ansible.builtin.set_fact:
+        nonprod_project: true
+
     - name: Check nonprod_project flag
       when: nonprod_project
       ansible.builtin.meta: end_play
-    
+
     # Checks for QA
     - name: set qa project default
-      set_fact: 
-        qa_project: False
+      ansible.builtin.set_fact:
+        qa_project: false
 
     - name: set qa requirements default
-      set_fact: 
-        pass_qa_requirements: True
+      ansible.builtin.set_fact:
+        pass_qa_requirements: true
 
     - name: Check if QA project
-      set_fact: 
-        qa_project: True
       when: proj_name is match('qa_*')
+      ansible.builtin.set_fact:
+        qa_project: true
 
     - name: Check if dev is deployed if it exists
-      set_fact: 
-        pass_qa_requirements: False
       when: not item.commit_exists and item.project_exists
       loop: "{{ project_info | selectattr('env', 'equalto', 'dev') }}"
+      ansible.builtin.set_fact:
+        pass_qa_requirements: false
 
     - name: Check qa flags
       when: qa_project and pass_qa_requirements
@@ -135,35 +137,35 @@
 
     # Checks for PSE
     - name: set pse project default
-      set_fact: 
-        pse_project: False
+      ansible.builtin.set_fact:
+        pse_project: false
 
     - name: set pse requirements default
-      set_fact: 
-        pass_pse_requirements: True
+      ansible.builtin.set_fact:
+        pass_pse_requirements: true
 
     - name: check if pse project
-      set_fact: 
-        pse_project: True
       when: proj_name is match("pse_*")
+      ansible.builtin.set_fact:
+        pse_project: true
 
     - name: check if dev is deployed
-      set_fact: 
-        pass_pse_requirements: False
       when: not item.commit_exists and item.project_exists
       loop: "{{ project_info | selectattr('env', 'equalto', 'dev') }}"
+      ansible.builtin.set_fact:
+        pass_pse_requirements: false
 
     - name: check if qa is deployed
-      set_fact: 
-        pass_pse_requirements: False
       when: not item.commit_exists and item.project_exists
       loop: "{{ project_info | selectattr('env', 'equalto', 'qa') }}"
+      ansible.builtin.set_fact:
+        pass_pse_requirements: false
 
     - name: check if nonprod is deployed
-      set_fact: 
-        pass_pse_requirements: False
       when: not item.commit_exists and item.project_exists
       loop: "{{ project_info | selectattr('env', 'equalto', 'nonprod') }}"
+      ansible.builtin.set_fact:
+        pass_pse_requirements: false
 
     - name: Check pse flags
       when: pse_project and pass_pse_requirements
@@ -171,41 +173,41 @@
 
     # Checks for prod
     - name: set prod project default
-      set_fact: 
-        prod_project: False
+      ansible.builtin.set_fact:
+        prod_project: false
 
     - name: set prod requirements default
-      set_fact: 
-        pass_prod_requirements: True
+      ansible.builtin.set_fact:
+        pass_prod_requirements: true
 
     - name: check if prod project
-      set_fact: 
-        prod_project: True
       when: proj_name is match("prod_*")
+      ansible.builtin.set_fact:
+        prod_project: true
 
     - name: check if dev is deployed
-      set_fact: 
-        pass_prod_requirements: False
       when: not item.commit_exists and item.project_exists
       loop: "{{ project_info | selectattr('env', 'equalto', 'dev') }}"
+      ansible.builtin.set_fact:
+        pass_prod_requirements: false
 
     - name: check if qa is deployed
-      set_fact: 
-        pass_prod_requirements: False
       when: not item.commit_exists and item.project_exists
       loop: "{{ project_info | selectattr('env', 'equalto', 'qa') }}"
+      ansible.builtin.set_fact:
+        pass_prod_requirements: false
 
     - name: check if pse is deployed
-      set_fact: 
-        pass_prod_requirements: False
       when: not item.commit_exists and item.project_exists
       loop: "{{ project_info | selectattr('env', 'equalto', 'pse') }}"
+      ansible.builtin.set_fact:
+        pass_prod_requirements: false
 
     - name: check if nonprod is deployed
-      set_fact: 
-        pass_prod_requirements: False
       when: not item.commit_exists and item.project_exists
       loop: "{{ project_info | selectattr('env', 'equalto', 'nonprod') }}"
+      ansible.builtin.set_fact:
+        pass_prod_requirements: false
 
     - name: Check prod flags
       when: prod_project and pass_prod_requirements
@@ -214,4 +216,4 @@
     # If not check has been passed, deploy is not allowed
     - name: if no other enviroment is found
       ansible.builtin.fail:
-        msg: "Not allowed to deploy due to enviroment considerations"
+        msg: Not allowed to deploy due to enviroment considerations
