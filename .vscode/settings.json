@@ -2,5 +2,6 @@
     "yaml.schemas": {
         "https://raw.githubusercontent.com/devfile/api/v2.2.0/schemas/latest/devfile.json": "vscode-vfs://github/jpriddy/jpriddy.lan-automation/devfile.yaml"
     },
-    "ansible.python.interpreterPath": "/usr/bin/python"
+    "ansible.python.interpreterPath": "/usr/bin/python",
+    "ansible.executionEnvironment.enabled": true
 }
