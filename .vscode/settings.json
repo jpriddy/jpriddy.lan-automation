@@ -3,5 +3,4 @@
         "https://raw.githubusercontent.com/devfile/api/v2.2.0/schemas/latest/devfile.json": "vscode-vfs://github/jpriddy/jpriddy.lan-automation/devfile.yaml"
     },
     "ansible.python.interpreterPath": "c:\\Users\\jpriddy\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
-    "ansible.executionEnvironment.enabled": true
 }
