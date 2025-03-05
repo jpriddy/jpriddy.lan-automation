@@ -1,0 +1,14 @@
+---
+exclude_paths:
+  - collections/requirements.yml
+  - mohami-security.yml
+  - config
+  - inventories
+  - .git
+parseable: true
+quiet: false
+verbosity: 0
+kinds:
+  - playbook: '*.{yml,yaml}'
+  - tasks: 'tasks/*.{yml,yaml}'
+
