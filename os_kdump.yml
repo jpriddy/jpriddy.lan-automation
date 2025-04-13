@@ -24,7 +24,7 @@
       ansible.posix.mount:
         src: "192.168.1.30:/volume2/crash"
         path: "/var/crash"
-        opts: "rw,sync,soft"
+        opts: "intr,rw,relatime,vers=3,rsize=131072,wsize=131072,namlen=255,hard,timeo=600,retrans=2,sec=sys,nolock,_netdev"
         state: mounted
         fstype: nfs
 
