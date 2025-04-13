@@ -9,7 +9,7 @@
 
     - name: Display the config
       ansible.builtin.debug:
-        msg: "The hostname is {{ ansible_net_hostname }} and the OS is {{ ansible_net_version }}"
+        msg: The hostname is {{ ansible_net_hostname }} and the OS is {{ ansible_net_version }}
 
     - name: Update the hostname
       cisco.ios.ios_config:
@@ -22,4 +22,4 @@
 
     - name: Display the changed config
       ansible.builtin.debug:
-        msg: "The new hostname is {{ ansible_net_hostname }} and the OS is {{ ansible_net_version }}"
+        msg: The new hostname is {{ ansible_net_hostname }} and the OS is {{ ansible_net_version }}
