@@ -7,7 +7,7 @@
       - { name: download, server_path: /volume1/download }
       # all others on volume2
       - { name: iso, server_path: /volume2/iso }
-      - { name: crash, server_path: /volume2/crash }
+      # done via kdump - { name: crash, server_path: /volume2/crash }
       - { name: scratch, server_path: /volume2/scratch }
       - { name: backup, server_path: /volume2/backup }
       - { name: web, server_path: /volume2/web }
