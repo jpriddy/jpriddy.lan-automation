@@ -5,4 +5,3 @@
   tasks:
 
     # configure cisco ios ssh server to listen on port 2222 & create a firewall rule & restart ssh & send a message to syslog saying that ssh was restarted through ansible
-    

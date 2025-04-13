@@ -9,6 +9,5 @@ parseable: true
 quiet: false
 verbosity: 0
 kinds:
-  - playbook: '*.{yml,yaml}'
-  - tasks: 'tasks/*.{yml,yaml}'
-
+  - playbook: "*.{yml,yaml}"
+  - tasks: tasks/*.{yml,yaml}

@@ -3,7 +3,6 @@
   hosts: all
 
   tasks:
-
     - name: Install required python packages
       ansible.builtin.dnf:
         name: "{{ item }}"
@@ -24,7 +23,7 @@
         ipa_client_state: present
         ipaadmin_password: "{ freeipa_admin_password }"
         ipaclient_mkhomedir: true
-        ipaclient_ntp_servers: "192.168.1.1"
+        ipaclient_ntp_servers: 192.168.1.1
         ipaclient_ssh_trust_dns: true
         ipaclient_allow_repair: true
         ipaclient_force_join: true
@@ -39,12 +38,12 @@
 
     - name: Create conf file for krb5 to support short hostnames
       ansible.builtin.template:
-         src: templates/50-krb5-short-hostnames.conf
-         dest: /etc/krb5.conf.d/50-krb5-short-hostnames.conf
-         mode: '0644'
+        src: templates/50-krb5-short-hostnames.conf
+        dest: /etc/krb5.conf.d/50-krb5-short-hostnames.conf
+        mode: "0644"
 
     - name: Create conf file for sshd to support short hostnames
       ansible.builtin.template:
-         src: templates/60-ssh-short-hostnames.conf.j2
-         dest: "/etc/ssh/sshd_config.d/60-ssh-short-hostnames.conf"
-         mode: '0644'
+        src: templates/60-ssh-short-hostnames.conf.j2
+        dest: /etc/ssh/sshd_config.d/60-ssh-short-hostnames.conf
+        mode: "0644"

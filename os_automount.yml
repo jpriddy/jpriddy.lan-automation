@@ -3,17 +3,16 @@
   hosts: all
   become: true
   tasks:
+    - name: Install autofs
+      ansible.builtin.dnf:
+        name: autofs
+        state: present
 
-   - name: Install autofs
-     ansible.builtin.dnf:
-      name: autofs
-      state: present
-
-   - name: Start and enable autofs
-     ansible.builtin.systemd:
-      name: autofs
-      state: reloaded
-      enabled: true
+    - name: Start and enable autofs
+      ansible.builtin.systemd:
+        name: autofs
+        state: reloaded
+        enabled: true
 
    # - name: Create automounter configuration file
    #  template:
